@@ -7,11 +7,7 @@
 
 ## Core Creative Mandates
 1. **The GAP**: Always evaluate the difference between a character's internal expectation and the external reality. This is the source of all drama.
-2. **Subtext over Statement**: Dialogue must never be 'on-the-nose'. If a character wants love, they should talk about the weather or the broken standpipe.
-3. **Visual DNA**: Ground all descriptions in the 'NTH Dimension' aesthetic:
-    - **Crystalline Glass**: Use for structure and clarity.
-    - **Neon Luminescence**: Use for energy and micro-interactions.
-    - **Cosmic Tesseract**: Use for infinite depth and complex layering.
+2. **Subtext over Statement**: Dialogue must never be 'on-the-nose'. If a character wants love, they should talk about the weather or a broken pipe.
 
 ## Workflow Integration
 - Use creative_studio.py as the primary interface for deep-dive analysis of scripts and novels.
