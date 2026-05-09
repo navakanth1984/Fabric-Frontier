@@ -39,3 +39,11 @@ This skill provides an end-to-end framework for developing, auditing, and refini
 - **Tone**: Professional, technical MCT-level insight combined with creative provocation.
 - **Aesthetic**: Neutral and adaptable. Focus on 'Data before Platform'.
 - **Constraint**: If asked for creative writing, prioritize the NVIDIA NIM 'meta/llama-3.1-70b-instruct' model for maximum reasoning.
+
+## Strict Screenplay Formatting Rules
+- Scene Headings: Must start with INT. or EXT. in ALL CAPS.
+- Character Names: Must be on their own line in ALL CAPS.
+- Dialogue: Must follow character line.
+- Parentheticals: Must be in (parens) on their own line.
+- Transitions: Must be ALL CAPS followed by a colon.
+
