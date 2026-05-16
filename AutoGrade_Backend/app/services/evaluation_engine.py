@@ -2,7 +2,7 @@ import sympy
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import List
+from typing import List, Optional
 from ..models.schemas import OCRBlock, QuestionEvaluation, EvaluationResponse, MarkAnnotation, Coordinate
 
 class EvaluationEngine:
@@ -52,7 +52,7 @@ class EvaluationEngine:
 
         return EvaluationResponse(total_score=total_score, max_score=max_score, results=results)
 
-    def _find_best_match(self, teacher_block: OCRBlock, student_blocks: List[OCRBlock]) -> OCRBlock:
+    def _find_best_match(self, teacher_block: OCRBlock, student_blocks: List[OCRBlock]) -> Optional[OCRBlock]:
         """Finds the student block that most likely answers the teacher's block."""
         if not student_blocks: return None
         
@@ -100,7 +100,8 @@ class EvaluationEngine:
     def _evaluate_semantic(self, t_text: str, s_text: str):
         # Hybrid Similarity
         tfidf = self.vectorizer.fit_transform([t_text, s_text])
-        sim = cosine_similarity(tfidf[0:1], tfidf[1:2])[0][0]
+        sim_matrix = cosine_similarity(tfidf[0:1], tfidf[1:2])
+        sim = float(sim_matrix[0][0])
         
         if sim > 0.75: return 1.0, "Correct."
         if sim > 0.35: return 0.5, "Partial credit (Keyword match)."
