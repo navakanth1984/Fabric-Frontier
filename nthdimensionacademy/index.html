@@ -19,7 +19,7 @@
         <div class="nav-container">
             <div class="logo">
                 <img src="assets/logo_gold.jpeg" alt="Logo">
-                <span>Nth Dimension Academy</span>
+                <span>N<span class="nth-style">TH</span> Dimension Academy</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -177,6 +177,15 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
+                        <h3>DP-700: Microsoft Fabric Data Engineer</h3>
+                        <span class="duration">2-3 Days Masterclass</span>
+                        <p>Our flagship program. Master the end-to-end data engineering lifecycle in Fabric, from OneLake management and Medallion architecture to real-time analytics and Spark optimization. Aligned with the latest Microsoft certification standards.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-panel">
                         <h3>DP-600: Microsoft Fabric Analytics Engineer</h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Conducted comprehensive training sessions for global engineering squads. Covered end-to-end analytics using Lakehouse architectures, Notebooks, and Power BI integration to transition legacy ETL teams to modern Fabric solutions.</p>
@@ -273,6 +282,24 @@
             </div>
         </div>
     </section>
+    <section id="fabric-demo" class="demo-section">
+        <div class="container">
+            <div class="glass-panel demo-container">
+                <h2 class="neon-text-gold">Microsoft Fabric: The Nth Dimension Demo</h2>
+                <p>Experience the convergence of Data Engineering and AI in our exclusive masterclass preview.</p>
+                <div class="video-wrapper">
+                    <video id="fabric-video-player" class="demo-video" poster="fabric_demo_thumbnail_1778223436843.png">
+                        <source src="assets/fabric_video.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-overlay" id="demo-overlay">
+                        <button class="play-btn" onclick="triggerFabricDemo()">
+                            <i class="ph-fill ph-play-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
@@ -280,7 +307,7 @@
                 <div class="footer-brand">
                     <div class="logo">
                         <img src="assets/logo_gold.jpeg" alt="Logo">
-                        <span>Nth Dimension Academy</span>
+                        <span>N<span class="nth-style">TH</span> Dimension Academy</span>
                     </div>
                     <p>Empowering the next generation of Cloud & Data Architects.</p>
                 </div>
@@ -292,10 +319,39 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Nth Dimension Academy. All rights reserved.</p>
+                <p>&copy; 2026 N<span class="nth-style">TH</span> Dimension Academy. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- AI Assistant: Cosmic Guide -->
+    <div id="ai-assistant" class="ai-assistant hidden">
+        <div class="assistant-header glass-panel">
+            <div class="assistant-info">
+                <img src="assets/logo_gold.jpeg" alt="Guide">
+                <div>
+                    <h4>Cosmic Guide</h4>
+                    <span class="status">Online | N<span class="nth-style">TH</span> Dimension</span>
+                </div>
+            </div>
+            <button id="close-assistant" class="close-btn"><i class="ph ph-x"></i></button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <div class="message system">
+                <p>Greetings, Voyager. I am your guide to the N<span class="nth-style">TH</span> Dimension Academy. How can I assist your data journey today?</p>
+            </div>
+        </div>
+        <div class="chat-input-area glass-panel">
+            <input type="text" id="user-input" placeholder="Ask about Fabric, Azure, or DP-600...">
+            <button id="send-msg"><i class="ph-fill ph-paper-plane-right"></i></button>
+            <button id="voice-msg" title="Multilingual Voice"><i class="ph-fill ph-microphone"></i></button>
+        </div>
+    </div>
+
+    <button id="open-assistant" class="floating-trigger glass-panel">
+        <i class="ph-fill ph-robot"></i>
+        <span>Ask Guide</span>
+    </button>
 
     <!-- 3D Graph Library -->
     <script src="https://unpkg.com/3d-force-graph"></script>
