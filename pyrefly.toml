@@ -1,0 +1,18 @@
+project-includes = [
+    "**/*.py*",
+    "**/*.ipynb",
+]
+project-excludes = [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/__pycache__/**",
+    "**/graphify-out/**",
+    "**/venv/**",
+    "**/.venv/**",
+    "**/flutter_sdk/**",
+]
+search-path = [
+    ".",
+    "daava_production/scripts",
+]
+python-interpreter-path = "C:\\Users\\navka\\AppData\\Local\\Programs\\Python\\Python313\\python.exe"
