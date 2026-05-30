@@ -91,7 +91,7 @@ Our training program is structured into 5 cohesive tracks, mapped directly to **
 *Directly aligned with the official [MicrosoftLearning/mslearn-fabric](https://github.com/MicrosoftLearning/mslearn-fabric) and [MSFTHub](https://msfthub.com/labs/azure/dp-700/) laboratory curriculum.*
 
 ```
-🎓 ACCASION TO MASTERY: Complete all 8 core laboratory exercises to build an enterprise-scale portfolio.
+🎓 ASCENSION TO MASTERY: Complete all 8 core laboratory exercises to build an enterprise-scale portfolio.
 ```
 
 ### 🧪 Lab 01: Create and Configure a Microsoft Fabric Lakehouse
@@ -154,7 +154,7 @@ Our training program is structured into 5 cohesive tracks, mapped directly to **
         > **⚠️ CRITICAL NOTICE:** **NEVER** execute `VACUUM` with `0` hours in a production workspace. Doing so permanently destroys all history required for Time Travel and runs a severe risk of table corruption if concurrent write processes are active. Keep the industry default minimum of **7 days (168 hours)** in production.
 
 ### 🧪 Lab 06: Implement and Load a Synapse Data Warehouse
-*   **Goal:** Create a enterprise data warehouse, load dimension tables using T-SQL, and run cross-database queries.
+*   **Goal:** Create an enterprise data warehouse, load dimension tables using T-SQL, and run cross-database queries.
 *   **Step-by-Step Exercise:**
     1.  Create a **Data Warehouse** named `NthDimension_Warehouse`.
     2.  Define Star Schema tables: create tables for dimensions (`DimProducts`, `DimDates`) and facts (`FactInventory`) using standard DDL SQL.
