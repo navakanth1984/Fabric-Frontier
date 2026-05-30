@@ -1250,11 +1250,15 @@ footer {
 
 /* Reduced Motion Static Fallback (WCAG 2.1 AA Compliance) */
 @media (prefers-reduced-motion: reduce) {
-    * {
+    .layer, .parallax-scene {
         animation-delay: 0s !important;
         animation-duration: 0s !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0s !important;
+        transform: none !important;
+    }
+    
+    html {
         scroll-behavior: auto !important;
     }
     

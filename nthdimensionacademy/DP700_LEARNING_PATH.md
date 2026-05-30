@@ -140,7 +140,18 @@ Our training program is structured into 5 cohesive tracks, mapped directly to **
         df_v1 = spark.read.option("versionAsOf", 1).table("FactSales")
         ```
     4.  Run the **`OPTIMIZE`** command to consolidate small files and apply **Z-Order** sorting on the `CustomerID` column for query performance.
-    5.  Run the **`VACUUM`** command (setting retention hours to 0 via Spark configurations) to permanently purge obsolete underlying files.
+    5.  Run the **`VACUUM`** command (setting retention hours to 0) to permanently purge obsolete underlying files.
+        > [!WARNING]
+        > **Production Warning & Safety Lock Bypass:**
+        > Delta Lake blocks vacuuming tables with zero retention by default to prevent irreversible data loss. In a learning sandbox environment, you must override this safety check:
+        > ```python
+        > # Disable the safety check configuration first
+        > spark.conf.set("spark.databricks.delta.retentionDurationCheck.enabled", "false")
+        > 
+        > # Run the vacuum command via SQL analytics engine
+        > spark.sql("VACUUM FactSales RETAIN 0 HOURS")
+        > ```
+        > **⚠️ CRITICAL NOTICE:** **NEVER** execute `VACUUM` with `0` hours in a production workspace. Doing so permanently destroys all history required for Time Travel and runs a severe risk of table corruption if concurrent write processes are active. Keep the industry default minimum of **7 days (168 hours)** in production.
 
 ### 🧪 Lab 06: Implement and Load a Synapse Data Warehouse
 *   **Goal:** Create a enterprise data warehouse, load dimension tables using T-SQL, and run cross-database queries.
