@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let scrollYVal = 0;
 
     const updateParallax = () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            if (layerCurtainLeft) layerCurtainLeft.style.transform = '';
+            if (layerCurtainRight) layerCurtainRight.style.transform = '';
+            if (layerPortal) {
+                layerPortal.style.transform = '';
+                layerPortal.style.opacity = '';
+            }
+            if (layerBg) layerBg.style.transform = '';
+            return;
+        }
         const maxScroll = window.innerHeight;
         const progress = Math.min(scrollYVal / maxScroll, 1);
         

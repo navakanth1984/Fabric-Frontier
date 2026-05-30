@@ -1248,4 +1248,37 @@ footer {
     font-size: 1.2rem;
 }
 
+/* Reduced Motion Static Fallback (WCAG 2.1 AA Compliance) */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .layer {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+    
+    .layer-curtain-left {
+        display: none !important;
+    }
+    
+    .layer-curtain-right {
+        display: none !important;
+    }
+    
+    .layer-portal {
+        transform: scale(1) !important;
+        opacity: 1 !important;
+    }
+    
+    .cursor-glow {
+        display: none !important;
+    }
+}
+
 
