@@ -21,3 +21,5 @@
 - **Scroll Reveals**: Elements should emerge with a vertical drift and fade.
 - **Micro-interactions**: Hovering on cards should trigger a "holographic tilt" (3D transform).
 - **Particles**: Subtle background particles moving towards the center (black hole effect).
+
+# End of Visual DNA specifications.
