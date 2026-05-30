@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="assets/portal_bg.png" as="image" type="image/png">
+    <link rel="preload" href="assets/portal_frame.png" as="image" type="image/png">
+    <link rel="preload" href="assets/curtain_left.png" as="image" type="image/png">
+    <link rel="preload" href="assets/curtain_right.png" as="image" type="image/png">
     <!-- Phosphor Icons for UI -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -33,53 +37,28 @@
         </div>
     </nav>
 
-    <!-- Premium Grid Hero Section with Video Backdrop + Floating 3D Tesseract -->
-    <header class="hero">
-        <div class="hero-bg">
-            <video autoplay loop muted playsinline style="opacity: 0.12;">
-                <source src="assets/hero_video.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="container" style="z-index: 2;">
-            <div class="asymmetric-grid">
-                <!-- Left Content Area -->
-                <div class="col-span-7" style="text-align: left; display: flex; flex-direction: column; justify-content: center;">
-                    <div class="inline-flex" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 30px; border: 1px solid rgba(0, 240, 255, 0.3); background: rgba(0, 240, 255, 0.05); margin-bottom: 1.5rem; width: fit-content; backdrop-filter: blur(10px);">
-                        <span style="position: relative; display: flex; h: 8px; w: 8px; width: 8px; height: 8px;">
-                            <span class="animate-pulse-gentle" style="position: absolute; display: inline-flex; height: 100%; width: 100%; border-radius: 50%; background: #00f0ff; opacity: 0.75;"></span>
-                            <span style="position: relative; display: inline-flex; border-radius: 50%; width: 8px; height: 8px; background: #00f0ff;"></span>
-                        </span>
-                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--hyper-drive-blue); font-weight: 700;">Quantum Access Active</span>
-                    </div>
-                    
-                    <h1 style="font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 900; color: #fff; margin-bottom: 1.5rem;">
-                        Master the <span class="text-gradient">Data Multiverse.</span>
-                    </h1>
-                    <p class="subtitle" style="text-align: left; max-width: 580px; margin-bottom: 2.5rem; font-size: 1.15rem; line-height: 1.6; color: var(--text-muted);">
-                        Led by Master Consultant and Microsoft Certified Trainer (MCT) Navakanth Reddy Dumpa. Bridging the gap between complex cloud engineering and scalable technical enablement.
-                    </p>
-                    
-                    <div class="hero-actions" style="justify-content: flex-start; margin-bottom: 2rem;">
-                        <a href="#training" class="btn btn-primary" style="box-shadow: 0 0 25px rgba(0, 240, 255, 0.4); display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem;">
-                            <span>Begin the Ascent</span>
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </a>
-                        <a href="#knowledge-graph" class="btn btn-secondary" style="padding: 1rem 2rem;">Explore Curriculum</a>
-                    </div>
-                    
-                    <div class="cert-bar" style="justify-content: flex-start; margin-top: 1rem;">
-                        <img src="assets/media__1777541920190.jpg" alt="MCT Badge" class="inline-cert-badge">
-                        <span>MCT</span> • <span>DP-700</span> • <span>DP-600</span> • <span>DP-203</span> • <span>DP-900</span>
-                    </div>
+    <header class="hero parallax-container">
+        <div class="parallax-scroll-wrapper">
+            <div class="parallax-scene" id="parallax-scene">
+                <div class="layer layer-bg"></div>
+                <div class="layer layer-portal"></div>
+                <div class="layer layer-curtain-left"></div>
+                <div class="layer layer-curtain-right"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-trust-header">
+                    <img src="assets/media__1777542950074.jpg" alt="Microsoft Certified Trainer" class="mct-hero-badge">
+                    <span class="trust-pill">MICROSOFT CERTIFIED TRAINER &bull; LEAD DATA ARCHITECT</span>
                 </div>
-                
-                <!-- Right Tesseract Visualization Area -->
-                <div class="col-span-5 relative" style="display: flex; justify-content: center; align-items: center; position: relative;">
-                    <div style="position: absolute; width: 120%; height: 120%; background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 70%); filter: blur(40px); pointer-events: none;"></div>
-                    <img src="assets/crystalline_tesseract.png" 
-                         alt="3D Glowing Tesseract Hypercube" 
-                         class="glow-blue animate-pulse-gentle" 
-                         style="width: 100%; max-width: 480px; height: auto; object-fit: contain; pointer-events: none; filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.25));">
+                <h1>Master the <br><span class="text-gradient">Data Multiverse</span></h1>
+                <p class="subtitle">Led by Navakanth Reddy Dumpa. Bridging the gap between complex cloud engineering and scalable technical enablement with Microsoft Fabric & Azure Databricks expertise.</p>
+                <div class="hero-actions">
+                    <a href="#training" class="btn btn-primary">Begin the Ascent</a>
+                    <a href="#expertise" class="btn btn-secondary">Explore Curriculum</a>
+                </div>
+                <div class="cert-bar">
+                    <img src="assets/media__1777541920190.jpg" alt="MCT Badge" class="inline-cert-badge">
+                    <span>MCT</span> • <span>DP-600</span> • <span>DP-203</span> • <span>DA-100</span> • <span>DP-900</span>
                 </div>
             </div>
         </div>

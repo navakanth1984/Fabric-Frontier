@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cache DOM references for 3D Parallax Portal (optimizes DOM performance)
+    const scrollWrapper = document.querySelector('.parallax-scroll-wrapper');
+    const layerCurtainLeft = document.querySelector('.layer-curtain-left');
+    const layerCurtainRight = document.querySelector('.layer-curtain-right');
+    const layerPortal = document.querySelector('.layer-portal');
+    const layerBg = document.querySelector('.layer-bg');
+    const parallaxScene = document.getElementById('parallax-scene');
+    const beginBtn = document.querySelector('.hero-actions .btn-primary');
+    const exploreBtn = document.querySelector('.hero-actions .btn-secondary');
+
     // Custom Cursor Glow Effect
     const cursorGlow = document.querySelector('.cursor-glow');
     
@@ -8,6 +18,84 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorGlow.style.top = `${e.clientY}px`;
         });
     });
+
+    // Parallax Scroll Event Interpolation throttled with requestAnimationFrame
+    let ticking = false;
+    let scrollYVal = 0;
+
+    const updateParallax = () => {
+        const maxScroll = window.innerHeight;
+        const progress = Math.min(scrollYVal / maxScroll, 1);
+        
+        // Split curtains left/right, scale portal ring, and scale space bg cleanly
+        if (layerCurtainLeft) {
+            layerCurtainLeft.style.transform = `translateX(${-progress * 100}%)`;
+        }
+        if (layerCurtainRight) {
+            layerCurtainRight.style.transform = `translateX(${progress * 100}%)`;
+        }
+        if (layerPortal) {
+            layerPortal.style.transform = `scale(${1 + progress * 2.5})`;
+            layerPortal.style.opacity = `${1 - progress}`;
+        }
+        if (layerBg) {
+            layerBg.style.transform = `scale(${1 + progress * 0.15})`;
+        }
+    };
+
+    const onScroll = () => {
+        scrollYVal = scrollWrapper ? scrollWrapper.scrollTop : window.scrollY;
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateParallax();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    if (scrollWrapper) {
+        scrollWrapper.addEventListener('scroll', onScroll);
+    } else {
+        window.addEventListener('scroll', onScroll);
+    }
+
+    // Gyroscope telemetry handler for 3D orientation tilt on Touch devices
+    const initGyro = () => {
+        if (typeof DeviceOrientationEvent !== 'undefined') {
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(response => {
+                        if (response === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                        }
+                    })
+                    .catch(error => console.warn('Gyro permission rejected:', error));
+            } else {
+                window.addEventListener('deviceorientation', handleOrientation);
+            }
+        }
+    };
+
+    const handleOrientation = (e) => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const x = e.beta;  // tilt front-to-back [-180, 180]
+        const y = e.gamma; // tilt left-to-right [-90, 90]
+        
+        if (x === null || y === null) return;
+        
+        // Map degrees to smooth transform rotate parameters
+        const tiltX = Math.min(Math.max(y / 15, -1), 1) * 8;
+        const tiltY = Math.min(Math.max((x - 45) / 15, -1), 1) * 8;
+        
+        if (parallaxScene) {
+            parallaxScene.style.transform = `rotateY(${tiltX}deg) rotateX(${-tiltY}deg)`;
+        }
+    };
+
+    // Bind gyro activation to interactive CTA clicks (safari gesture rule)
+    if (beginBtn) beginBtn.addEventListener('click', initGyro);
+    if (exploreBtn) exploreBtn.addEventListener('click', initGyro);
 
     // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
