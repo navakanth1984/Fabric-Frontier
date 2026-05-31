@@ -54,4 +54,16 @@ To prevent repository bloating and push failures:
 - Any single binary asset (e.g. `.mp4`, `.mov`, `.png`, `.jpeg`, `.zip`) with file size exceeding **50 MB** MUST be tracked using Git LFS (Large File Storage) instead of regular `git add`.
 - Do not commit large generated media assets directly to standard Git history unless explicitly verified to be under the 50 MB threshold.
 
+---
 
+## Edit workflow — DELETE before INSERT
+Before adding any new HTML element, CSS rule, or JS block that replaces
+an existing one:
+1. VIEW the full section (min 20 lines around the target).
+2. Note the exact line numbers of ALL existing instances of that element.
+3. DELETE the old instances first in one edit.
+4. Verify deletion with Select-String before inserting the replacement.
+Never use "append below" as an edit strategy for content that replaces
+existing content. Append-without-delete has caused duplicate IDs,
+duplicate nodes, duplicate tab buttons, and duplicate variable
+declarations across multiple sessions.
