@@ -307,9 +307,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 { id: 'Data Mesh', group: 4, val: 12, name: 'Data Mesh Strategy' },
                 
                 // Certifications
-                { id: 'DP-600', group: 5, val: 15, name: 'DP-600: Fabric Analytics' },
-                { id: 'DP-203', group: 5, val: 15, name: 'DP-203: Azure Data Engineer' },
-                { id: 'DP-900', group: 5, val: 10, name: 'DP-900: Data Fundamentals' },
+                { id: 'DP-700', group: 5, val: 18, name: 'DP-700: Microsoft Fabric Data Engineer (Active)' },
+                { id: 'DP-600', group: 5, val: 15, name: 'DP-600: Fabric Analytics Engineer (Active)' },
+                { id: 'DP-203', group: 5, val: 15, name: 'DP-203: Azure Data Engineer (Retired)' },
+                { id: 'DP-900', group: 5, val: 10, name: 'DP-900: Azure Data Fundamentals (Coming Soon)' },
                 
                 // Specific Technologies & Modules
                 { id: 'ADLS Gen2', group: 2, val: 10, name: 'ADLS Gen2 Storage' },
@@ -325,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
             links: [
                 { source: 'MCT', target: 'Azure Data Ecosystem' },
                 { source: 'MCT', target: 'Microsoft Fabric' },
+                { source: 'MCT', target: 'DP-700' },
                 { source: 'MCT', target: 'DP-600' },
                 { source: 'MCT', target: 'DP-203' },
                 { source: 'MCT', target: 'DP-900' },
@@ -338,6 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { source: 'Microsoft Fabric', target: 'Medallion Architecture' },
                 { source: 'Microsoft Fabric', target: 'Lakehouse' },
                 { source: 'Microsoft Fabric', target: 'Power BI' },
+                { source: 'Microsoft Fabric', target: 'DP-700' },
                 { source: 'Microsoft Fabric', target: 'DP-600' },
                 
                 { source: 'Azure Databricks', target: 'Medallion Architecture' },
@@ -353,6 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 { source: 'Python Automation', target: 'Alteryx' },
                 { source: 'Python Automation', target: 'Azure Databricks' },
                 
+                { source: 'DP-700', target: 'Microsoft Fabric' },
+                { source: 'DP-700', target: 'Global Enterprise Cohorts' },
                 { source: 'DP-203', target: 'Azure Data Ecosystem' },
                 { source: 'DP-900', target: 'Global Enterprise Cohorts' },
                 { source: 'DP-600', target: 'Global Enterprise Cohorts' },
@@ -661,6 +666,8 @@ document.addEventListener('DOMContentLoaded', () => {
         dp700: {
             trustPill: "DP-700 MASTER CURRICULUM",
             title: "Microsoft Fabric Data Engineer Atlas",
+            status: "active",
+            statusText: "Active",
             exam: "Exam DP-700",
             credential: "Fabric Data Engineer Associate",
             level: "Elite Master",
@@ -742,6 +749,8 @@ document.addEventListener('DOMContentLoaded', () => {
         dp600: {
             trustPill: "DP-600 MASTER CURRICULUM",
             title: "Microsoft Fabric Analytics Engineer Atlas",
+            status: "active",
+            statusText: "Active",
             exam: "Exam DP-600",
             credential: "Fabric Analytics Engineer Associate",
             level: "Specialist",
@@ -824,6 +833,8 @@ document.addEventListener('DOMContentLoaded', () => {
         dp900: {
             trustPill: "DP-900 CURRICULUM",
             title: "Azure Data Fundamentals (Coming Soon)",
+            status: "coming",
+            statusText: "Coming Soon",
             exam: "Exam DP-900",
             credential: "Microsoft Certified: Azure Data Fundamentals",
             level: "Foundation",
@@ -886,7 +897,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Populate header details
         document.getElementById('modal-trust-pill').innerText = data.trustPill;
-        document.getElementById('modal-title').innerText = data.title;
+        
+        // Populate title with status badge
+        const titleElem = document.getElementById('modal-title');
+        titleElem.innerHTML = `${data.title} <span class="status-badge ${data.status}" style="margin-left: 10px; font-size: 10px; padding: 0.2rem 0.6rem; border-radius: 4px; vertical-align: middle;">${data.statusText}</span>`;
 
         // Populate Quick Reference
         document.getElementById('modal-ref-exam').innerText = data.exam;
