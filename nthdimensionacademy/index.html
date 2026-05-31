@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="preload" href="assets/curtain_left.png" as="image" type="image/png">
-    <link rel="preload" href="assets/curtain_right.png" as="image" type="image/png">
     <!-- Phosphor Icons for UI -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -31,32 +29,57 @@
                 <li><a href="#training">Training</a></li>
                 <li><a href="#experience">Experience</a></li>
             </ul>
-            <a href="mailto:mct@nthdimensionacademy.com" class="btn btn-outline">Contact</a>
+            <a href="mailto:navkanthr@gmail.com" class="btn btn-outline">Contact</a>
         </div>
     </nav>
 
-    <header class="hero parallax-container">
-        <div class="parallax-scroll-wrapper">
-            <div class="parallax-scene" id="parallax-scene">
-                <div class="layer layer-bg"></div>
-                <div class="layer layer-portal"></div>
-                <div class="layer layer-curtain-left"></div>
-                <div class="layer layer-curtain-right"></div>
-            </div>
-            <div class="hero-content">
-                <div class="hero-trust-header">
-                    <img src="assets/media__1777542950074.jpg" alt="Microsoft Certified Trainer" class="mct-hero-badge">
-                    <span class="trust-pill">MICROSOFT CERTIFIED TRAINER &bull; LEAD DATA ARCHITECT</span>
+    <!-- Premium Grid Hero Section with Video Backdrop + Floating 3D Tesseract -->
+    <header class="hero">
+        <div class="hero-bg">
+            <video autoplay loop muted playsinline style="opacity: 0.12;">
+                <source src="assets/hero_video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="container" style="z-index: 2;">
+            <div class="asymmetric-grid">
+                <!-- Left Content Area -->
+                <div class="col-span-7" style="text-align: left; display: flex; flex-direction: column; justify-content: center;">
+                    <div class="inline-flex" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 30px; border: 1px solid rgba(0, 240, 255, 0.3); background: rgba(0, 240, 255, 0.05); margin-bottom: 1.5rem; width: fit-content; backdrop-filter: blur(10px);">
+                        <span style="position: relative; display: flex; h: 8px; w: 8px; width: 8px; height: 8px;">
+                            <span class="animate-pulse-gentle" style="position: absolute; display: inline-flex; height: 100%; width: 100%; border-radius: 50%; background: #00f0ff; opacity: 0.75;"></span>
+                            <span style="position: relative; display: inline-flex; border-radius: 50%; width: 8px; height: 8px; background: #00f0ff;"></span>
+                        </span>
+                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--hyper-drive-blue); font-weight: 700;">Quantum Access Active</span>
+                    </div>
+                    
+                    <h1 class="text-headline-xl">
+                        Master the <span class="text-gradient">Data Multiverse.</span>    
+                    </h1>
+                    <p class="subtitle" style="text-align: left; max-width: 580px; margin-bottom: 2.5rem; font-size: 1.15rem; line-height: 1.6; color: var(--text-muted);">
+                        Led by Master Consultant and Microsoft Certified Trainer (MCT) Navakanth Reddy Dumpa. Bridging the gap between complex cloud engineering and scalable technical enablement.
+                    </p>
+                    
+                    <div class="hero-actions" style="justify-content: flex-start; margin-bottom: 2rem;">
+                        <a href="#training" class="btn btn-primary" style="box-shadow: 0 0 25px rgba(0, 240, 255, 0.4); display: flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem;">
+                            <span>Begin the Ascent</span>
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                        <a href="#knowledge-graph" class="btn btn-secondary" style="padding: 1rem 2rem;">Explore Curriculum</a>
+                    </div>
+                    
+                    <div class="cert-bar" style="justify-content: flex-start; margin-top: 1rem;">
+                        <img src="assets/media__1777541920190.jpg" alt="MCT Badge" class="inline-cert-badge">
+                        <span>MCT</span> • <span>DP-700</span> • <span>DP-600</span> • <span>DP-203</span> • <span>DP-900</span>
+                    </div>
                 </div>
-                <h1>Master the <br><span class="text-gradient">Data Multiverse</span></h1>
-                <p class="subtitle">Led by Navakanth Reddy Dumpa. Bridging the gap between complex cloud engineering and scalable technical enablement with Microsoft Fabric & Azure Databricks expertise.</p>
-                <div class="hero-actions">
-                    <a href="#training" class="btn btn-primary">Begin the Ascent</a>
-                    <a href="#expertise" class="btn btn-secondary">Explore Curriculum</a>
-                </div>
-                <div class="cert-bar">
-                    <img src="assets/media__1777541920190.jpg" alt="MCT Badge" class="inline-cert-badge">
-                    <span>MCT</span> • <span>DP-600</span> • <span>DP-203</span> • <span>DA-100</span> • <span>DP-900</span>
+                
+                <!-- Right Tesseract Visualization Area -->
+                <div class="col-span-5 relative" style="display: flex; justify-content: center; align-items: center; position: relative;">
+                    <div style="position: absolute; width: 120%; height: 120%; background: radial-gradient(circle, rgba(138, 43, 226, 0.12) 0%, transparent 70%); filter: blur(40px); pointer-events: none;"></div>
+                    <img src="assets/crystalline_tesseract.png" 
+                         alt="3D Glowing Tesseract Hypercube" 
+                         class="glow-blue animate-pulse-gentle" 
+                         style="width: 100%; max-width: 480px; height: auto; object-fit: contain; pointer-events: none; filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.25));">
                 </div>
             </div>
         </div>
@@ -75,8 +98,8 @@
                         <p>A specialist in the Azure Data Ecosystem, delivering high-impact training programs for global audiences while concurrently serving as a Lead Data Architect. Proven expertise in designing Medallion architectures using Microsoft Fabric and Azure Databricks, empowering teams through structured, certification-aligned curricula and real-world project mentoring.</p>
                         <div class="contact-info">
                             <p><i class="ph ph-map-pin"></i> Hyderabad, India</p>
-                            <p><i class="ph ph-envelope-simple"></i> mct@nthdimensionacademy.com</p>
-                            <p><i class="ph ph-phone"></i> +91 6304980314</p>
+                            <p><i class="ph ph-envelope-simple"></i> navkanthr@gmail.com</p>
+                            <p><i class="ph ph-phone"></i> +91 9885757677</p>
                         </div>
                     </div>
                     <div class="about-stats">
@@ -184,7 +207,7 @@
         <div class="container">
             <div class="asymmetric-grid" style="align-items: flex-end; margin-bottom: 3.5rem;">
                 <div class="col-span-7 space-y-4">
-                    <h2 class="font-headline-lg text-headline-lg text-white">Pathways to <span class="text-master-gold">Ascension</span></h2>
+                    <h2 class="text-headline-lg">Pathways to <span class="text-master-gold">Ascension</span></h2>
                     <p class="font-body-md text-body-md text-on-surface-variant max-w-lg" style="color: var(--text-muted); font-size: 1.1rem;">Our certification paths are engineered to transform skilled engineers into multi-dimensional data architects.</p>
                 </div>
                 <div class="col-span-5" style="text-align: right; padding-bottom: 0.5rem;">
@@ -202,16 +225,13 @@
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0, 240, 255, 0.08); border-color: rgba(0, 240, 255, 0.25); display: flex; align-items: center; justify-content: center;">
                             <i class="ph-bold ph-git-branch text-hyper-drive-blue" style="font-size: 1.6rem; color: #00f0ff;"></i>
                         </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
-                            DP-700 Masterclass 
-                            <span style="background: rgba(0, 240, 255, 0.15); color: var(--accent-blue); border: 1px solid rgba(0, 240, 255, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">ACTIVE</span>
-                        </span>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-700 Masterclass</span>
                         <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Microsoft Fabric Data Engineer</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Master the end-to-end data engineering lifecycle in Fabric, from OneLake management and Medallion architecture to real-time analytics and Spark optimization.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
                         <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Elite Master</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp700')">Syllabus</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-700 Microsoft Fabric Data Engineer curriculum.');">Syllabus</button>
                     </div>
                 </div>
 
@@ -221,54 +241,29 @@
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(138, 43, 226, 0.08); border-color: rgba(138, 43, 226, 0.25); display: flex; align-items: center; justify-content: center;">
                             <i class="ph-bold ph-chart-bar text-gradient" style="font-size: 1.6rem;"></i>
                         </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
-                            DP-600 Masterclass 
-                            <span style="background: rgba(0, 240, 255, 0.15); color: var(--accent-blue); border: 1px solid rgba(0, 240, 255, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">ACTIVE</span>
-                        </span>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-600 Masterclass</span>
                         <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Implementing Analytics Solutions</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Conducted high-impact training for global squads. Covers Fabric Analytics, Lakehouses, Notebooks, and Power BI enterprise integration for modern ETL squads.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
                         <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Specialist</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp600')">Syllabus</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-600 Implementing Analytics Solutions curriculum.');">Syllabus</button>
                     </div>
                 </div>
 
-                <!-- Course Card 3 (DP-203 Retired) -->
-                <div class="glass-card holographic-sweep p-8 rounded-xl flex flex-col justify-between" style="min-height: 350px; border-radius: 20px; padding: 2.5rem; opacity: 0.55; filter: grayscale(60%); position: relative;">
+                <!-- Course Card 3 -->
+                <div class="glass-card holographic-sweep p-8 rounded-xl flex flex-col justify-between" style="min-height: 350px; border-radius: 20px; padding: 2.5rem;">
                     <div>
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: center;">
-                            <i class="ph-bold ph-database text-white" style="font-size: 1.6rem; opacity: 0.6;"></i>
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0, 240, 255, 0.08); border-color: rgba(0, 240, 255, 0.25); display: flex; align-items: center; justify-content: center;">
+                            <i class="ph-bold ph-database text-hyper-drive-blue" style="font-size: 1.6rem; color: #00f0ff;"></i>
                         </div>
-                        <span class="font-label-caps" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
-                            DP-203 Masterclass 
-                            <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">RETIRED</span>
-                        </span>
-                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; opacity: 0.7;">Azure Data Engineering</h3>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-203 Masterclass</span>
+                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Azure Data Engineering</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Scalable cloud pipelines, PySpark execution, Delta Lakes, and Medallion architecture deployments inside Synapse, Databricks, and Data Factory.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
-                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Legacy Core</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px; border-color: rgba(255,255,255,0.08); color: #666; cursor: not-allowed;" disabled>Retired</button>
-                    </div>
-                </div>
-
-                <!-- Course Card 4 (DP-900 Coming Soon) -->
-                <div class="glass-card holographic-sweep p-8 rounded-xl flex flex-col justify-between" style="min-height: 350px; border-radius: 20px; padding: 2.5rem; border-color: rgba(255, 215, 0, 0.2);">
-                    <div>
-                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255, 215, 0, 0.08); border-color: rgba(255, 215, 0, 0.25); display: flex; align-items: center; justify-content: center;">
-                            <i class="ph-bold ph-compass text-master-gold" style="font-size: 1.6rem; color: var(--master-gold);"></i>
-                        </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
-                            DP-900 Masterclass 
-                            <span style="background: rgba(255, 215, 0, 0.15); color: var(--master-gold); border: 1px solid rgba(255, 215, 0, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">COMING SOON</span>
-                        </span>
-                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Azure Data Fundamentals</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Master the foundational concepts of cloud data services, relational & non-relational database models, and modern analytics workloads on Azure.</p>
-                    </div>
-                    <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
-                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Foundation</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp900')">Syllabus</button>
+                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Core Master</span>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-203 Azure Data Engineering curriculum.');">Syllabus</button>
                     </div>
                 </div>
             </div>
@@ -278,7 +273,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-700: Microsoft Fabric Data Engineer <span class="status-badge active">Active</span></h3>
+                        <h3>DP-700: Microsoft Fabric Data Engineer</h3>
                         <span class="duration">2-3 Days Masterclass</span>
                         <p>Flagship advanced orchestration training. Learn to setup Fabric capacity, build robust Medallion architectures inside OneLake, manage security and pipelines with Data Factory, and perform low-latency stream analysis with Real-Time Intelligence.</p>
                     </div>
@@ -287,7 +282,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-600: Microsoft Fabric Analytics Engineer <span class="status-badge active">Active</span></h3>
+                        <h3>DP-600: Microsoft Fabric Analytics Engineer</h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Conducted comprehensive training sessions for global engineering squads. Covered end-to-end analytics using Lakehouse architectures, Notebooks, and Power BI integration to transition legacy ETL teams to modern Fabric solutions.</p>
                     </div>
@@ -296,7 +291,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-203: Data Engineering on Microsoft Azure <span class="status-badge retired">Retired</span></h3>
+                        <h3>DP-203: Data Engineering on Microsoft Azure</h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Delivered in-depth virtual and classroom training on building scalable data pipelines, PySpark, T-SQL, Azure Databricks, and Medallion architecture for enterprise clients and internal teams.</p>
                     </div>
@@ -305,7 +300,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-900: Azure Data Fundamentals <span class="status-badge coming">Coming Soon</span></h3>
+                        <h3>DP-900: Azure Data Fundamentals</h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Led foundational workshops and masterclasses for cross-functional teams, college graduates, and new hires, introducing core cloud data concepts.</p>
                     </div>
@@ -422,17 +417,12 @@
             <div class="glass-panel demo-container" style="border-color: rgba(255, 215, 0, 0.25);">
                 <h2 class="text-master-gold" style="font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem;">Microsoft Fabric: The Nth Dimension Demo</h2>
                 <p>Experience the convergence of Data Engineering and AI in our exclusive masterclass preview.</p>
-                <div class="video-wrapper" style="border-color: rgba(0, 240, 255, 0.3); position: relative; margin: 40px auto 0;">
-                    <!-- 16:9 Laptop/Desktop Video -->
-                    <video id="fabric-video-16-9" class="demo-video video-16-9" poster="assets/fabric_demo_thumbnail_1778223436843.png" preload="none">
-                        <source src="assets/_Maintain_the_3D_hyper-realistic_crystalline_202605061839.mp4" type="video/mp4">
+                <div class="video-wrapper" style="border-color: rgba(0, 240, 255, 0.3);">
+                    <video id="fabric-video-player" class="demo-video" poster="fabric_demo_thumbnail_1778223436843.png">
+                        <source src="assets/fabric_video.mp4" type="video/mp4">
                     </video>
-                    <!-- 9:16 Mobile/Portrait Video -->
-                    <video id="fabric-video-9-16" class="demo-video video-9-16" poster="assets/In_the_middle_of_the_202605052332.jpeg" preload="none">
-                        <source src="assets/Continue_with_pulsating_text_and_202605061853.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-overlay" id="demo-overlay" style="z-index: 5;">
-                        <button class="play-btn" type="button" aria-label="Launch Fabric Demo" onclick="triggerFabricDemo()">
+                    <div class="play-overlay" id="demo-overlay">
+                        <button class="play-btn" onclick="triggerFabricDemo()">
                             <i class="ph-fill ph-play-circle"></i>
                         </button>
                     </div>
@@ -453,8 +443,8 @@
                 </div>
                 <div class="footer-links">
                     <h4>Connect</h4>
-                    <a href="mailto:mct@nthdimensionacademy.com"><i class="ph-fill ph-envelope-simple"></i> mct@nthdimensionacademy.com</a>
-                    <p><i class="ph-fill ph-phone"></i> +91 6304980314</p>
+                    <a href="mailto:navkanthr@gmail.com"><i class="ph-fill ph-envelope-simple"></i> navkanthr@gmail.com</a>
+                    <p><i class="ph-fill ph-phone"></i> +91 9885757677</p>
                     <p><i class="ph-fill ph-map-pin"></i> Hyderabad, India</p>
                 </div>
             </div>
@@ -493,117 +483,6 @@
         <i class="ph-fill ph-robot"></i>
         <span>Ask Guide</span>
     </button>
-
-    <!-- Premium Interactive Syllabus Modal for DP-700 (Microsoft Fabric) -->
-    <div id="syllabus-modal" class="syllabus-modal hidden">
-        <div class="modal-backdrop" onclick="closeSyllabusModal()"></div>
-        <div class="modal-content glass-panel" style="background: rgba(10, 15, 25, 0.95); border-color: rgba(0, 240, 255, 0.35); box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);">
-            <div class="modal-header">
-                <div class="modal-title-info">
-                    <span id="modal-trust-pill" class="trust-pill text-master-gold" style="font-size: 11px; font-weight: 700; letter-spacing: 1px;">DP-700 MASTER CURRICULUM</span>
-                    <h3 id="modal-title" class="text-white" style="font-size: 1.8rem; font-weight: 700; margin-top: 0.2rem;">Microsoft Fabric Data Engineer Atlas</h3>
-                </div>
-                <button onclick="closeSyllabusModal()" class="close-btn" style="background: transparent; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; transition: color 0.3s;"><i class="ph ph-x"></i></button>
-            </div>
-            
-            <div class="modal-tabs">
-                <button class="modal-tab-btn active" data-tab="overview" onclick="switchSyllabusTab('overview')">Overview</button>
-                <button class="modal-tab-btn" data-tab="tracks" onclick="switchSyllabusTab('tracks')">Academic Tracks</button>
-                <button class="modal-tab-btn" data-tab="labs" onclick="switchSyllabusTab('labs')">Hands-On Labs</button>
-            </div>
-
-            <div class="modal-body-content">
-                <!-- Overview Tab -->
-                <div id="tab-overview" class="modal-tab-pane active">
-                    <div class="quick-reference-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
-                        <div class="glass-panel" style="padding: 1.5rem; background: rgba(5, 7, 15, 0.4); border-color: rgba(255, 255, 255, 0.05);">
-                            <h4 class="text-master-gold" style="font-weight: 700; margin-bottom: 0.8rem;"><i class="ph ph-info"></i> Course Quick Reference</h4>
-                            <table style="width: 100%; font-size: 0.9rem; color: var(--text-muted); border-collapse: collapse;">
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);"><td style="padding: 0.5rem 0; font-weight: 600;">Official Exam</td><td id="modal-ref-exam" style="padding: 0.5rem 0; text-align: right; color: var(--accent-blue);">Exam DP-700</td></tr>
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);"><td style="padding: 0.5rem 0; font-weight: 600;">Credential</td><td id="modal-ref-credential" style="padding: 0.5rem 0; text-align: right; color: white;">Fabric Data Engineer Associate</td></tr>
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);"><td style="padding: 0.5rem 0; font-weight: 600;">Level</td><td id="modal-ref-level" style="padding: 0.5rem 0; text-align: right; color: white;">Intermediate / Advanced</td></tr>
-                                <tr><td style="padding: 0.5rem 0; font-weight: 600;">Cost</td><td id="modal-ref-cost" style="padding: 0.5rem 0; text-align: right; color: white;">$165 USD</td></tr>
-                            </table>
-                        </div>
-                        <div class="glass-panel" style="padding: 1.5rem; background: rgba(5, 7, 15, 0.4); border-color: rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; justify-content: center;">
-                            <h4 class="text-hyper-drive-blue" style="font-weight: 700; margin-bottom: 0.8rem;"><i class="ph ph-chart-pie"></i> Exam Weight Breakdown</h4>
-                            <ul id="modal-weight-list" style="font-size: 0.9rem; list-style: none; padding: 0; margin: 0; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.5rem;">
-                                <li style="display: flex; justify-content: space-between;"><span>Implement & Manage Analytics</span><span style="color: white; font-weight: 600;">30–35%</span></li>
-                                <li style="display: flex; justify-content: space-between;"><span>Ingest & Transform Data</span><span style="color: white; font-weight: 600;">30–35%</span></li>
-                                <li style="display: flex; justify-content: space-between;"><span>Monitor & Optimize Solutions</span><span style="color: white; font-weight: 600;">30–35%</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="modal-overview-desc" class="overview-desc" style="line-height: 1.6; color: var(--text-muted);">
-                        <p style="margin-bottom: 1rem;">Led by Master Consultant and Microsoft Certified Trainer (MCT) <strong>Navakanth Reddy Dumpa</strong>, this curriculum is engineered to guide data professionals through the architectural and operational realities of the unified Microsoft Fabric ecosystem.</p>
-                        <p>Perfect for intermediate and advanced data professionals seeking to master batch pipelines, lakehouse medallion architectures, database mirroring, OneLake virtualization, real-time intelligence streams, and version control (CI/CD DevOps).</p>
-                    </div>
-                </div>
-
-                <!-- Academic Tracks Tab -->
-                <div id="tab-tracks" class="modal-tab-pane">
-                    <div id="modal-tracks-container" class="tracks-container" style="max-height: 380px; overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="track-block glass-panel" style="padding: 1.2rem; background: rgba(5, 7, 15, 0.3); border-color: rgba(255, 255, 255, 0.05);">
-                            <h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">🛠️ Track 1: Workspace Management, Security & CI/CD</h5>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Capacity governance, custom Spark compute pools, Azure DevOps version control, Row-Level (RLS) & Column-Level Security (CLS), and multi-stage deployment release pipelines.</p>
-                        </div>
-                        <div class="track-block glass-panel" style="padding: 1.2rem; background: rgba(5, 7, 15, 0.3); border-color: rgba(255, 255, 255, 0.05);">
-                            <h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">💾 Track 2: OneLake Architecture & Medallion Strategy</h5>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Designing high-performance Delta Parquet tables, conformed schema processing, and establishing structured Medallion pipelines (Bronze ➔ Silver ➔ Gold) within Lakehouses.</p>
-                        </div>
-                        <div class="track-block glass-panel" style="padding: 1.2rem; background: rgba(5, 7, 15, 0.3); border-color: rgba(255, 255, 255, 0.05);">
-                            <h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">🚀 Track 3: High-Scale Ingestion & Mirroring</h5>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Ingestion pipelines, Dataflows Gen2, OneLake cloud shortcuts (S3, ADLS Gen2, GCS) with zero sync delay, and continuous database replication (Mirroring) from SQL / Snowflake.</p>
-                        </div>
-                        <div class="track-block glass-panel" style="padding: 1.2rem; background: rgba(5, 7, 15, 0.3); border-color: rgba(255, 255, 255, 0.05);">
-                            <h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">💻 Track 4: Advanced Multi-Engine Transformations</h5>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">PySpark Notebook processing at scale, T-SQL Synapse Warehouse engineering, views, stored procedures, and Kusto Query Language (KQL) analytics.</p>
-                        </div>
-                        <div class="track-block glass-panel" style="padding: 1.2rem; background: rgba(5, 7, 15, 0.3); border-color: rgba(255, 255, 255, 0.05);">
-                            <h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">📡 Track 5: Real-Time Intelligence & Streaming Analytics</h5>
-                            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Eventstreams, Eventhouses, KQL databases, CDC event routing, and streaming window transformations (sliding, session, tumbling).</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hands-On Labs Tab -->
-                <div id="tab-labs" class="modal-tab-pane">
-                    <div id="modal-labs-container" class="labs-container" style="max-height: 380px; overflow-y: auto; padding-right: 0.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <div class="lab-block glass-panel" style="padding: 1rem; border-color: rgba(0, 240, 255, 0.15);">
-                            <span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">LAB 01</span>
-                            <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">Create and Configure a Fabric Lakehouse</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Provision spaces, import historical structured sales datasets, build pySpark Delta Tables, and run analytics queries via SQL endpoints.</p>
-                        </div>
-                        <div class="lab-block glass-panel" style="padding: 1rem; border-color: rgba(0, 240, 255, 0.15);">
-                            <span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">LAB 02</span>
-                            <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">Orchestrate Batch Ingestion with Pipelines</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Construct data pipeline copy activities, parameterize SQL database sources, and chain automated notebooks and trigger alerts.</p>
-                        </div>
-                        <div class="lab-block glass-panel" style="padding: 1rem; border-color: rgba(0, 240, 255, 0.15);">
-                            <span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">LAB 03</span>
-                            <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">No-Code ETL with Dataflows Gen2</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Leverage visual Power Query Online to expand JSON feeds, clean profiles, replace null fields, and load conformed dimensions.</p>
-                        </div>
-                        <div class="lab-block glass-panel" style="padding: 1rem; border-color: rgba(0, 240, 255, 0.15);">
-                            <span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">LAB 04</span>
-                            <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">Advanced Transformations using Spark Notebooks</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Perform large-scale joins, deduplication, timestamp formatting, and partition output Delta tables in OneLake dynamically.</p>
-                        </div>
-                        <div class="lab-block glass-panel" style="padding: 1rem; border-color: rgba(0, 240, 255, 0.15);">
-                            <span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">LAB 05</span>
-                            <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">Delta Lake Optimization & Time Travel</h5>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Query transaction history logs using versionAsOf, and execute performance optimization commands (OPTIMIZE, Z-ORDER, VACUUM).</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
-                <button class="btn btn-secondary" onclick="closeSyllabusModal()" style="border-radius: 20px; padding: 0.5rem 1.5rem;">Close</button>
-                <button id="modal-begin-btn" class="btn btn-primary" onclick="window.beginSyllabusAscent()" style="border-radius: 20px; padding: 0.5rem 1.5rem;">Begin Ascent</button>
-            </div>
-        </div>
-    </div>
 
     <!-- 3D Graph Library & Force Graph -->
     <script src="https://unpkg.com/3d-force-graph"></script>
