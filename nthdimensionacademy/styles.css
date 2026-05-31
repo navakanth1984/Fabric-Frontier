@@ -268,18 +268,65 @@ h2 {
 }
 
 .layer-bg {
-    background-image: url('assets/portal_bg.png');
+    background-size: cover;
+    background-position: center;
     width: 100%;
     z-index: 1;
     will-change: transform;
 }
 
 .layer-portal {
-    background-image: url('assets/portal_frame.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 100%;
     z-index: 2;
     transform-origin: center center;
     will-change: transform, opacity;
+}
+
+/* 16:9 Aspect Ratio / Laptop Alignments */
+@media (min-width: 768px) {
+    .layer-bg {
+        background-image: url('assets/[IMAGE_END]__A_premium_4D_glass_202605052049.jpeg');
+    }
+    .layer-portal {
+        background-image: url('assets/Merge_these_images_and_create_202605052035.jpeg');
+    }
+    .video-16-9 {
+        display: block !important;
+    }
+    .video-9-16 {
+        display: none !important;
+    }
+    .video-wrapper {
+        aspect-ratio: 16/9;
+        max-width: 900px;
+        animation: glow-pulse 3s ease-in-out infinite;
+    }
+}
+
+/* 9:16 Aspect Ratio / Mobile Alignments */
+@media (max-width: 767px) {
+    .layer-bg {
+        background-image: url('assets/[IMAGE_END]__A_10-row_vertical_grid_202605060728.jpeg');
+    }
+    .layer-portal {
+        background-image: url('assets/In_the_middle_of_the_202605052332.jpeg');
+        background-size: 70%;
+    }
+    .video-16-9 {
+        display: none !important;
+    }
+    .video-9-16 {
+        display: block !important;
+    }
+    .video-wrapper {
+        aspect-ratio: 9/16;
+        max-width: 320px;
+        border-radius: 28px; /* phone frame */
+        animation: glow-pulse-mobile 3s ease-in-out infinite;
+    }
 }
 
 .layer-curtain-left {
@@ -923,6 +970,18 @@ footer {
     animation: neon-pulse 1.5s infinite;
 }
 
+@keyframes glow-pulse {
+    0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.15); border-color: rgba(0, 240, 255, 0.3); }
+    50% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 240, 255, 0.5); border-color: rgba(0, 240, 255, 0.6); }
+    100% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.15); border-color: rgba(0, 240, 255, 0.3); }
+}
+
+@keyframes glow-pulse-mobile {
+    0% { box-shadow: 0 0 0 8px #111, 0 0 0 10px #333, 0 0 20px rgba(0, 240, 255, 0.2); border-color: rgba(0, 240, 255, 0.3); }
+    50% { box-shadow: 0 0 0 8px #111, 0 0 0 10px #333, 0 0 35px rgba(0, 240, 255, 0.5); border-color: rgba(0, 240, 255, 0.6); }
+    100% { box-shadow: 0 0 0 8px #111, 0 0 0 10px #333, 0 0 20px rgba(0, 240, 255, 0.2); border-color: rgba(0, 240, 255, 0.3); }
+}
+
 /* AI Assistant: Cosmic Guide */
 .ai-assistant {
     position: fixed;
@@ -1284,5 +1343,201 @@ footer {
         display: none !important;
     }
 }
+
+/* ==========================================================================
+   Premium Interactive Syllabus Modal (Glassmorphic & Responsive)
+   ========================================================================== */
+.syllabus-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.syllabus-modal.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(3, 5, 10, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(10, 15, 25, 0.95);
+    border-radius: 24px;
+    padding: 2.5rem;
+    z-index: 10;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+}
+
+.modal-tabs {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.8rem;
+}
+
+.modal-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.modal-tab-btn:hover {
+    color: var(--hyper-drive-blue);
+    background: rgba(0, 240, 255, 0.05);
+}
+
+.modal-tab-btn.active {
+    color: var(--hyper-drive-blue);
+    background: rgba(0, 240, 255, 0.08);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.15);
+}
+
+.modal-tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.modal-tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.track-block, .lab-block {
+    transition: all 0.3s ease;
+}
+
+.track-block:hover, .lab-block:hover {
+    transform: translateX(5px);
+    border-color: rgba(0, 240, 255, 0.3) !important;
+}
+
+.lab-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+}
+
+/* Responsive UI & Layout Improvements (Laptops, Tablets, and Mobiles Alignment) */
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Skills Grid Mobile Optimizations to prevent text/button overlaps */
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+    
+    .skills-grid .glass-card {
+        padding: 1.5rem !important; /* Reduce excessive padding to give content more room */
+        min-height: auto !important; /* Allow card height to expand naturally depending on content */
+        aspect-ratio: auto !important;
+        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .skills-grid .glass-card p {
+        margin-bottom: 1rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Premium Interactive Modal Mobile Optimizations */
+    .modal-content {
+        padding: 1.5rem !important;
+        width: 95% !important;
+        max-width: 95vw !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    .modal-title-info h3 {
+        font-size: 1.4rem !important;
+    }
+
+    .quick-reference-grid {
+        grid-template-columns: 1fr !important; /* Stack vertically to prevent horizontal overlaps */
+        gap: 1rem !important;
+    }
+
+    .modal-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem !important;
+    }
+
+    .modal-tab-btn {
+        font-size: 0.9rem !important;
+        padding: 0.4rem 0.8rem !important;
+        flex-shrink: 0;
+    }
+
+    .tracks-container, .labs-container {
+        max-height: 300px !important; /* Adjust height for smaller mobile viewport ratios */
+    }
+    
+    /* Overall responsive typography and alignments */
+    .section-header h2 {
+        font-size: 2rem !important;
+    }
+    
+    .section-header p {
+        font-size: 0.95rem !important;
+    }
+}
+
 
 
