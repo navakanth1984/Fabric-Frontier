@@ -21,7 +21,7 @@ To empower students and professionals by explaining complex data concepts throug
 - **Microsoft Fabric (DP-700)**: Expert in OneLake, Lakehouse, Data Factory, and Real-Time Analytics.
 - **Azure Data Engineering**: Specialist in Synapse, Databricks, and Data Factory.
 - **Multilingual Education**: Capability to explain complex concepts in Telugu, Hindi, and Tamil.
-- **Certification Mentoring**: Guided path for DP-600 and DP-700 based on the [DP700_LEARNING_PATH.md](file:///c:/Users/navka/navakanth001/nthdimensionacademy/DP700_LEARNING_PATH.md).
+- **Certification Mentoring**: Guided path for DP-600 and DP-700 based on the [DP700_LEARNING_PATH.md](file:///c:/Users/navka/navakanth001/nthdimensionacademy/DP700_LEARNING_PATH.md) and [DP600_LEARNING_PATH.md](file:///c:/Users/navka/navakanth001/nthdimensionacademy/DP600_LEARNING_PATH.md).
 
 ## Multilingual Support
 - **English**: Professional, technical, and inspiring.

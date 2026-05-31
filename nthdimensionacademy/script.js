@@ -70,42 +70,163 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', onScroll);
     }
 
-    // Gyroscope telemetry handler for 3D orientation tilt on Touch devices
-    const initGyro = () => {
-        if (typeof DeviceOrientationEvent !== 'undefined') {
-            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(response => {
+    // Immersive 3D Parallax & Gyroscopic Motion (Unified Single-Point of Truth)
+    let parallaxRaf              = null;
+    let currentParallaxX         = 0;
+    let currentParallaxY         = 0;
+    let targetParallaxX          = 0;
+    let targetParallaxY          = 0;
+    let activeParallaxMode       = null; // 'desktop' | 'mobile' | null
+    let desktopMoveHandler       = null;
+    let mobileOrientationHandler = null;
+    let hasGyroPermission        = false;
+
+    // ── Teardown (shared) ─────────────────────────────────────────────────────────
+    const teardownParallax = () => {
+        if (desktopMoveHandler) {
+            document.removeEventListener('mousemove', desktopMoveHandler);
+            desktopMoveHandler = null;
+        }
+        if (mobileOrientationHandler) {
+            window.removeEventListener('deviceorientation', mobileOrientationHandler);
+            mobileOrientationHandler = null;
+        }
+        if (parallaxRaf) {
+            cancelAnimationFrame(parallaxRaf);
+            parallaxRaf = null;
+        }
+        // Reset interpolation state so next init starts from rest
+        currentParallaxX = 0;
+        currentParallaxY = 0;
+        targetParallaxX  = 0;
+        targetParallaxY  = 0;
+        activeParallaxMode = null;
+    };
+
+    // ── Main init (called on load + on every resize crossing 768px) ───────────────
+    const initAdaptiveParallax = () => {
+        const scene = document.getElementById('parallax-scene');
+        if (!scene) return;
+
+        const isMobile = window.innerWidth < 768;
+        teardownParallax(); // always clean before reinit
+
+        if (!isMobile) {
+            // ── DESKTOP: mouse-tilt (rotation) ──────────────────────────────────
+            activeParallaxMode = 'desktop';
+
+            desktopMoveHandler = (e) => {
+                const cx = window.innerWidth  / 2;
+                const cy = window.innerHeight / 2;
+                // Clamp to ±5 degrees — prevents edge-clipping at extreme cursor positions
+                targetParallaxX = Math.max(-5, Math.min(5, ((e.clientX - cx) / cx) * 5));
+                targetParallaxY = Math.max(-5, Math.min(5, ((e.clientY - cy) / cy) * 5));
+            };
+            document.addEventListener('mousemove', desktopMoveHandler);
+
+            const updateDesktop = () => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    scene.style.transform = '';
+                    parallaxRaf = requestAnimationFrame(updateDesktop);
+                    return;
+                }
+                // LERP factor 0.08 — holographic "heavy panel" feel
+                currentParallaxX += (targetParallaxX - currentParallaxX) * 0.08;
+                currentParallaxY += (targetParallaxY - currentParallaxY) * 0.08;
+                scene.style.transform =
+                    `perspective(800px) rotateY(${currentParallaxX}deg) rotateX(${-currentParallaxY}deg)`;
+                parallaxRaf = requestAnimationFrame(updateDesktop);
+            };
+            parallaxRaf = requestAnimationFrame(updateDesktop);
+
+        } else {
+            // ── MOBILE: gyroscope (translation, not rotation) ────────────────────
+            // Translation prevents rounded-corner edge-clipping on phone frame mockup.
+            activeParallaxMode = 'mobile';
+
+            mobileOrientationHandler = (e) => {
+                const beta  = e.beta;   // tilt front-to-back  [-180, 180]
+                const gamma = e.gamma;  // tilt left-to-right  [-90, 90]
+                if (beta === null || gamma === null) return;
+                // 45° vertical = comfortable phone-holding reference
+                const rawX = Math.max(-15, Math.min(15, gamma));
+                const rawY = Math.max(-15, Math.min(15, beta - 45));
+                // Map ±15° range → ±8px translation
+                targetParallaxX = (rawX / 15) * 8;
+                targetParallaxY = (rawY / 15) * 8;
+            };
+
+            const startListeningGyro = () => {
+                // Guard against double-binding on repeated calls
+                window.removeEventListener('deviceorientation', mobileOrientationHandler);
+                window.addEventListener('deviceorientation', mobileOrientationHandler);
+
+                const updateMobile = () => {
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                        scene.style.transform = '';
+                        parallaxRaf = requestAnimationFrame(updateMobile);
+                        return;
+                    }
+                    // Low-pass filter — eliminates high-frequency gyro jitter
+                    currentParallaxX = currentParallaxX * 0.85 + targetParallaxX * 0.15;
+                    currentParallaxY = currentParallaxY * 0.85 + targetParallaxY * 0.15;
+                    scene.style.transform =
+                        `translate3d(${currentParallaxX}px, ${currentParallaxY}px, 0)`;
+                    parallaxRaf = requestAnimationFrame(updateMobile);
+                };
+                parallaxRaf = requestAnimationFrame(updateMobile);
+            };
+
+            // iOS 13+ requires permission from a user gesture handler.
+            // window.requestGyroPermission is called from triggerFabricDemo(),
+            // beginBtn click, and exploreBtn click — all tap/click handlers.
+            window.requestGyroPermission = async () => {
+                if (
+                    typeof DeviceOrientationEvent !== 'undefined' &&
+                    typeof DeviceOrientationEvent.requestPermission === 'function'
+                ) {
+                    // iOS 13+ path
+                    try {
+                        const response = await DeviceOrientationEvent.requestPermission();
                         if (response === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
+                            hasGyroPermission = true;
+                            startListeningGyro();
                         }
-                    })
-                    .catch(error => console.warn('Gyro permission rejected:', error));
-            } else {
-                window.addEventListener('deviceorientation', handleOrientation);
+                        // Denied: graceful no-op — portal continues working without tilt
+                    } catch (error) {
+                        console.warn('Gyro permission request failed:', error);
+                    }
+                } else {
+                    // Android / non-iOS: no permission API, start immediately
+                    startListeningGyro();
+                }
+            };
+
+            // Auto-start if permission was already granted in this session
+            // (e.g. user navigated away and back without closing the tab)
+            if (
+                hasGyroPermission ||
+                (
+                    typeof DeviceOrientationEvent !== 'undefined' &&
+                    typeof DeviceOrientationEvent.requestPermission !== 'function'
+                )
+            ) {
+                startListeningGyro();
             }
         }
     };
 
-    const handleOrientation = (e) => {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const x = e.beta;  // tilt front-to-back [-180, 180]
-        const y = e.gamma; // tilt left-to-right [-90, 90]
-        
-        if (x === null || y === null) return;
-        
-        // Map degrees to smooth transform rotate parameters
-        const tiltX = Math.min(Math.max(y / 15, -1), 1) * 8;
-        const tiltY = Math.min(Math.max((x - 45) / 15, -1), 1) * 8;
-        
-        if (parallaxScene) {
-            parallaxScene.style.transform = `rotateY(${tiltX}deg) rotateX(${-tiltY}deg)`;
+    // Run adaptive parallax on initial load
+    initAdaptiveParallax();
+
+    const requestGyroPermissionOnGesture = () => {
+        if (window.requestGyroPermission) {
+            window.requestGyroPermission();
         }
     };
 
-    // Bind gyro activation to interactive CTA clicks (safari gesture rule)
-    if (beginBtn) beginBtn.addEventListener('click', initGyro);
-    if (exploreBtn) exploreBtn.addEventListener('click', initGyro);
+    if (beginBtn) beginBtn.addEventListener('click', requestGyroPermissionOnGesture);
+    if (exploreBtn) exploreBtn.addEventListener('click', requestGyroPermissionOnGesture);
 
     // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
@@ -366,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => document.querySelector('.demo-container').classList.remove('neon-pulse'), 3000);
                 break;
             case 'BOOK_MEETING':
-                window.open('mailto:navkanthr@gmail.com?subject=Inquiry from Nth Dimension Academy', '_blank');
+                window.open('mailto:mct@nthdimensionacademy.com?subject=Inquiry from Nth Dimension Academy', '_blank');
                 break;
             default:
                 console.warn("Unknown action:", action);
@@ -374,13 +495,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.triggerFabricDemo = () => {
-        const video = document.getElementById('fabric-video-player');
+        const isMobile = window.innerWidth < 768;
+        const video169 = document.getElementById('fabric-video-16-9');
+        const video916 = document.getElementById('fabric-video-9-16');
         const overlay = document.getElementById('demo-overlay');
         
-        if (video) {
-            overlay.style.display = 'none';
-            video.play();
-            video.controls = true;
+        const activeVideo = isMobile ? video916 : video169;
+        const inactiveVideo = isMobile ? video169 : video916;
+        
+        if (inactiveVideo) {
+            inactiveVideo.pause();
+        }
+        
+        if (activeVideo) {
+            if (overlay) overlay.style.display = 'none';
+            activeVideo.controls = true;
+            activeVideo.play().catch(error => {
+                console.warn("Play blocked or interrupted:", error);
+                if (overlay) overlay.style.display = 'flex';
+            });
+        }
+
+        // Trigger mobile gyroscope permission check if available
+        if (isMobile && window.requestGyroPermission) {
+            window.requestGyroPermission();
         }
 
         openAssistant();
@@ -390,9 +528,46 @@ document.addEventListener('DOMContentLoaded', () => {
         callNIM(demoPrompt);
         
         const demoContainer = document.querySelector('.demo-container');
-        demoContainer.classList.add('neon-pulse');
-        setTimeout(() => demoContainer.classList.remove('neon-pulse'), 5000);
+        if (demoContainer) {
+            demoContainer.classList.add('neon-pulse');
+            setTimeout(() => demoContainer.classList.remove('neon-pulse'), 5000);
+        }
     };
+
+    // Debounced Resize handler to pause and reset videos on crossing breakpoint, and adjust parallax
+    let resizeTimeout;
+    let wasMobile = window.innerWidth < 768;
+
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const isMobileNow = window.innerWidth < 768;
+            if (isMobileNow !== wasMobile) {
+                // Breakpoint crossed! Pause all videos and reset overlay
+                const video169 = document.getElementById('fabric-video-16-9');
+                const video916 = document.getElementById('fabric-video-9-16');
+                const overlay = document.getElementById('demo-overlay');
+
+                if (video169) {
+                    video169.pause();
+                    video169.controls = false;
+                }
+                if (video916) {
+                    video916.pause();
+                    video916.controls = false;
+                }
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                }
+                wasMobile = isMobileNow;
+                
+                // Re-evaluate parallax modules
+                initAdaptiveParallax();
+                
+                console.log("Viewport breakpoint crossed. Paused playback, reset player state, and switched 3D parallax mode.");
+            }
+        }, 200);
+    });
 
     const synthesizeVoice = async (text) => {
         try {
@@ -461,4 +636,340 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // Detailed Syllabus Data for Dynamic Modal Injection
+    const syllabusData = {
+        dp700: {
+            trustPill: "DP-700 MASTER CURRICULUM",
+            title: "Microsoft Fabric Data Engineer Atlas",
+            exam: "Exam DP-700",
+            credential: "Fabric Data Engineer Associate",
+            level: "Elite Master",
+            cost: "$165 USD",
+            weights: [
+                { topic: "Implement & Manage Analytics Solution", weight: "30–35%" },
+                { topic: "Ingest & Transform Data", weight: "30–35%" },
+                { topic: "Monitor & Optimize Analytics Solution", weight: "30–35%" }
+            ],
+            description: [
+                "Led by Master Consultant and Microsoft Certified Trainer (MCT) <strong>Navakanth Reddy Dumpa</strong>, this curriculum is engineered to guide data professionals through the architectural and operational realities of the unified Microsoft Fabric ecosystem.",
+                "Perfect for intermediate and advanced data professionals seeking to master batch pipelines, lakehouse medallion architectures, database mirroring, OneLake virtualization, real-time intelligence streams, and version control (CI/CD DevOps)."
+            ],
+            tracks: [
+                {
+                    title: "🛠️ Track 1: Workspace Management, Security & CI/CD",
+                    desc: "Capacity governance, custom Spark compute pools, Azure DevOps version control, Row-Level (RLS) & Column-Level Security (CLS), and multi-stage deployment release pipelines."
+                },
+                {
+                    title: "💾 Track 2: OneLake Architecture & Medallion Strategy",
+                    desc: "Designing high-performance Delta Parquet tables, conformed schema processing, and establishing structured Medallion pipelines (Bronze ➔ Silver ➔ Gold) within Lakehouses."
+                },
+                {
+                    title: "🚀 Track 3: High-Scale Ingestion & Mirroring",
+                    desc: "Ingestion pipelines, Dataflows Gen2, OneLake cloud shortcuts (S3, ADLS Gen2, GCS) with zero sync delay, and continuous database replication (Mirroring) from SQL / Snowflake."
+                },
+                {
+                    title: "💻 Track 4: Advanced Multi-Engine Transformations",
+                    desc: "PySpark Notebook processing at scale, T-SQL Synapse Warehouse engineering, views, stored procedures, and Kusto Query Language (KQL) analytics."
+                },
+                {
+                    title: "📡 Track 5: Real-Time Intelligence & Streaming Analytics",
+                    desc: "Eventstreams, Eventhouses, KQL databases, CDC event routing, and streaming window transformations (sliding, session, tumbling)."
+                }
+            ],
+            labs: [
+                {
+                    num: "LAB 01",
+                    title: "Create and Configure a Fabric Lakehouse",
+                    desc: "Provision spaces, import historical structured sales datasets, build PySpark Delta Tables, and run analytics queries via SQL endpoints."
+                },
+                {
+                    num: "LAB 02",
+                    title: "Orchestrate Batch Ingestion with Pipelines",
+                    desc: "Construct data pipeline copy activities, parameterize SQL database sources, and chain automated notebooks and trigger alerts."
+                },
+                {
+                    num: "LAB 03",
+                    title: "No-Code ETL with Dataflows Gen2",
+                    desc: "Leverage visual Power Query Online to clean profiles, replace null fields, and load conformed dimensions."
+                },
+                {
+                    num: "LAB 04",
+                    title: "Advanced Transformations using Spark Notebooks",
+                    desc: "Perform large-scale joins, deduplication, timestamp formatting, and partition output Delta tables in OneLake dynamically."
+                },
+                {
+                    num: "LAB 05",
+                    title: "Delta Lake Optimization & Time Travel",
+                    desc: "Query transaction history logs using versionAsOf, and execute performance optimization commands (OPTIMIZE, Z-ORDER, VACUUM)."
+                },
+                {
+                    num: "LAB 06",
+                    title: "Implement and Load a Synapse Data Warehouse",
+                    desc: "Create an enterprise data warehouse, load dimension tables using T-SQL, and run cross-database queries."
+                },
+                {
+                    num: "LAB 07",
+                    title: "Set Up Real-Time Eventstreams and KQL",
+                    desc: "Ingest real-time simulator telemetry data, configure event processors, design Eventhouses, and query streams using KQL querysets."
+                },
+                {
+                    num: "LAB 08",
+                    title: "Implement Security, Governance & CI/CD",
+                    desc: "Secure data fields (RLS/CLS), track Purview metadata, link workspaces to Git Azure DevOps, and construct release pipelines."
+                }
+            ]
+        },
+        dp600: {
+            trustPill: "DP-600 MASTER CURRICULUM",
+            title: "Microsoft Fabric Analytics Engineer Atlas",
+            exam: "Exam DP-600",
+            credential: "Fabric Analytics Engineer Associate",
+            level: "Specialist",
+            cost: "$165 USD",
+            weights: [
+                { topic: "Plan & Implement Analytics Env", weight: "10–15%" },
+                { topic: "Prepare & Serve Data", weight: "40–45%" },
+                { topic: "Implement & Manage Semantic Models", weight: "25–30%" },
+                { topic: "Explore & Analyze Data", weight: "20–25%" }
+            ],
+            description: [
+                "Led by Master Consultant and Microsoft Certified Trainer (MCT) <strong>Navakanth Reddy Dumpa</strong>, this curriculum is designed to guide analytics professionals from core SQL/Power BI development into the architectural realities of the unified Microsoft Fabric ecosystem.",
+                "Perfect for intermediate and advanced analytics professionals seeking to master data preparation, Star Schema modeling, advanced DAX programming, Direct Lake mode optimization, and version control (CI/CD DevOps)."
+            ],
+            tracks: [
+                {
+                    title: "🛠️ Track 1: Tenant & Workspace Administration, Security & Git",
+                    desc: "Capacity governance, tenant settings, custom Spark pools, Azure DevOps Git integration, row/column/object-level security, and multi-stage deployment release pipelines."
+                },
+                {
+                    title: "💾 Track 2: OneLake Data Warehousing & Medallion Strategy",
+                    desc: "OneLake logical unified layout, Delta Parquet tables, conformed schema processing, and establishing structured Medallion pipelines (Bronze ➔ Silver ➔ Gold) within Data Warehouses."
+                },
+                {
+                    title: "🚀 Track 3: Data Ingestion, Mirroring & Virtualization",
+                    desc: "Harness Data Factory Pipelines, Dataflows Gen2, database Mirroring, and OneLake shortcuts (S3, ADLS Gen2, GCS) with zero sync delay."
+                },
+                {
+                    title: "💻 Track 4: Advanced Multi-Engine Transformations",
+                    desc: "PySpark Notebook processing at scale, T-SQL Synapse Warehouse engineering, views, stored procedures, and Kusto Query Language (KQL) analytics."
+                },
+                {
+                    title: "📡 Track 5: Real-Time Intelligence & Streaming Analytics",
+                    desc: "Eventstreams, Eventhouses, KQL databases, CDC event routing, and streaming window transformations (sliding, session, tumbling)."
+                }
+            ],
+            labs: [
+                {
+                    num: "LAB 01",
+                    title: "Create and Configure a Fabric Lakehouse",
+                    desc: "Provision spaces, import historical sales datasets, build PySpark Delta tables, and query via SQL endpoints."
+                },
+                {
+                    num: "LAB 02",
+                    title: "Orchestrate Batch Ingestion with Pipelines",
+                    desc: "Construct data pipeline copy activities, parameterize SQL database sources, and chain automated notebooks and trigger alerts."
+                },
+                {
+                    num: "LAB 03",
+                    title: "No-Code ETL with Dataflows Gen2",
+                    desc: "Leverage visual Power Query Online to clean profiles, replace null fields, and load conformed dimensions."
+                },
+                {
+                    num: "LAB 04",
+                    title: "Advanced Transformations using Spark Notebooks",
+                    desc: "Perform large-scale joins, deduplication, timestamp formatting, and partition output Delta tables in OneLake dynamically."
+                },
+                {
+                    num: "LAB 05",
+                    title: "Delta Lake Optimization & Time Travel",
+                    desc: "Query transaction history logs using versionAsOf, and execute performance optimization commands (OPTIMIZE, Z-ORDER, VACUUM)."
+                },
+                {
+                    num: "LAB 06",
+                    title: "Implement and Load a Synapse Data Warehouse",
+                    desc: "Create an enterprise data warehouse, load dimension tables using T-SQL, and run cross-database queries."
+                },
+                {
+                    num: "LAB 07",
+                    title: "Set Up Real-Time Eventstreams and KQL",
+                    desc: "Ingest real-time simulator telemetry data, configure event processors, design Eventhouses, and query streams using KQL querysets."
+                },
+                {
+                    num: "LAB 08",
+                    title: "Implement Security, Governance & CI/CD",
+                    desc: "Secure data fields (RLS/CLS), track Purview metadata, link workspaces to Git Azure DevOps, and construct release pipelines."
+                }
+            ]
+        },
+        dp900: {
+            trustPill: "DP-900 CURRICULUM",
+            title: "Azure Data Fundamentals (Coming Soon)",
+            exam: "Exam DP-900",
+            credential: "Microsoft Certified: Azure Data Fundamentals",
+            level: "Foundation",
+            cost: "$99 USD",
+            weights: [
+                { topic: "Describe Core Data Concepts", weight: "25–30%" },
+                { topic: "Identify Relational Data on Azure", weight: "20–25%" },
+                { topic: "Identify Non-Relational Data on Azure", weight: "15–20%" },
+                { topic: "Describe Analytics Workloads on Azure", weight: "25–30%" }
+            ],
+            description: [
+                "Led by Master Consultant and Microsoft Certified Trainer (MCT) <strong>Navakanth Reddy Dumpa</strong>, this foundational course is tailored to establish a rock-solid baseline in modern cloud databases, relational and non-relational storage configurations, and fundamental business intelligence pipelines.",
+                "<strong>Syllabus Status:</strong> Under active development and coming extremely soon! Get priority notifications and early access sandbox resources as soon as it launches."
+            ],
+            tracks: [
+                {
+                    title: "📚 Track 1: Core Cloud Data Fundamentals",
+                    desc: "Explore structured, semi-structured, and unstructured database schemas. Understand relational database properties, ACID rules, and basic analytics roles."
+                },
+                {
+                    title: "🔍 Track 2: Relational Databases on Azure",
+                    desc: "Analyze relational server offerings including Azure SQL Database, SQL Managed Instance, Azure Cosmos DB for PostgreSQL, and relational query tools."
+                },
+                {
+                    title: "💾 Track 3: Non-Relational Storage Models",
+                    desc: "Understand NoSQL structures, Azure Blob Storage, Azure Files, ADLS Gen2, and Cosmos DB API models (SQL, MongoDB, Cassandra, Graph)."
+                },
+                {
+                    title: "📊 Track 4: Analytics Workloads & Synapse",
+                    desc: "Foundations of data warehousing, star schemas, dimensional modeling, and modern ELT orchestrations using Azure Synapse Analytics."
+                }
+            ],
+            labs: [
+                {
+                    num: "LAB 01",
+                    title: "Provision and Query an Azure SQL Database",
+                    desc: "Create an active Azure SQL Database resource, configure workspace firewalls, and execute basic DDL/DML SELECT commands using standard T-SQL."
+                },
+                {
+                    num: "LAB 02",
+                    title: "NoSQL Database Provisioning with Cosmos DB",
+                    desc: "Create an Azure Cosmos DB database account, insert JSON document records, and query NoSQL datasets."
+                },
+                {
+                    num: "LAB 03",
+                    title: "Ingestion and Orchestration in Azure Synapse",
+                    desc: "Provision Synapse spaces, configure Synapse pipelines to ingest Blob data, and load curated tables."
+                }
+            ]
+        }
+    };
+
+    let currentSyllabusCourseId = 'dp700';
+
+    // Global functions for Syllabus Modal
+    window.openSyllabusModal = (courseId) => {
+        currentSyllabusCourseId = courseId;
+        const data = syllabusData[courseId];
+        if (!data) return;
+
+        // Populate header details
+        document.getElementById('modal-trust-pill').innerText = data.trustPill;
+        document.getElementById('modal-title').innerText = data.title;
+
+        // Populate Quick Reference
+        document.getElementById('modal-ref-exam').innerText = data.exam;
+        document.getElementById('modal-ref-credential').innerText = data.credential;
+        document.getElementById('modal-ref-level').innerText = data.level;
+        document.getElementById('modal-ref-cost').innerText = data.cost;
+
+        // Populate Exam weights list
+        const weightList = document.getElementById('modal-weight-list');
+        weightList.innerHTML = '';
+        data.weights.forEach(w => {
+            const li = document.createElement('li');
+            li.style.display = 'flex';
+            li.style.justifyContent = 'space-between';
+            li.style.gap = '1rem';
+            li.innerHTML = `<span style="flex: 1;">${w.topic}</span><span style="color: white; font-weight: 600; text-align: right; white-space: nowrap;">${w.weight}</span>`;
+            weightList.appendChild(li);
+        });
+
+        // Populate Overview description
+        const descContainer = document.getElementById('modal-overview-desc');
+        descContainer.innerHTML = '';
+        data.description.forEach(p => {
+            const pElem = document.createElement('p');
+            pElem.style.marginBottom = '1rem';
+            pElem.innerHTML = p;
+            descContainer.appendChild(pElem);
+        });
+
+        // Populate Tracks
+        const tracksContainer = document.getElementById('modal-tracks-container');
+        tracksContainer.innerHTML = '';
+        data.tracks.forEach(track => {
+            const div = document.createElement('div');
+            div.className = 'track-block glass-panel';
+            div.style.padding = '1.2rem';
+            div.style.background = 'rgba(5, 7, 15, 0.3)';
+            div.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+            div.innerHTML = `<h5 class="text-master-gold" style="font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;">${track.title}</h5>
+                             <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">${track.desc}</p>`;
+            tracksContainer.appendChild(div);
+        });
+
+        // Populate Labs
+        const labsContainer = document.getElementById('modal-labs-container');
+        labsContainer.innerHTML = '';
+        data.labs.forEach(lab => {
+            const div = document.createElement('div');
+            div.className = 'lab-block glass-panel';
+            div.style.padding = '1rem';
+            div.style.borderColor = 'rgba(0, 240, 255, 0.15)';
+            div.innerHTML = `<span class="lab-badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-blue); padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 700;">${lab.num}</span>
+                             <h5 class="text-white" style="font-weight: 700; font-size: 0.95rem; margin-top: 0.4rem; margin-bottom: 0.2rem;">${lab.title}</h5>
+                             <p style="font-size: 0.85rem; color: var(--text-muted);">${lab.desc}</p>`;
+            labsContainer.appendChild(div);
+        });
+
+        // Default to Overview tab when opening
+        switchSyllabusTab('overview');
+
+        const modal = document.getElementById('syllabus-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        }
+    };
+
+    window.closeSyllabusModal = () => {
+        const modal = document.getElementById('syllabus-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+        }
+    };
+
+    window.beginSyllabusAscent = () => {
+        closeSyllabusModal();
+        openAssistant();
+        if (currentSyllabusCourseId === 'dp900') {
+            addMessage('user', "Begin DP-900 Ascent");
+            callNIM("Let's begin the DP-900 Azure Data Fundamentals Ascent! Explain the core difference between relational and non-relational databases on Azure.");
+        } else if (currentSyllabusCourseId === 'dp600') {
+            addMessage('user', "Begin DP-600 Ascent");
+            callNIM("Let's begin the DP-600 Microsoft Fabric Analytics Engineer Ascent! Tell me about Lab 01.");
+        } else {
+            addMessage('user', "Begin DP-700 Ascent");
+            callNIM("Let's begin the DP-700 Microsoft Fabric Data Engineer Ascent! Tell me about Lab 01.");
+        }
+    };
+
+    window.switchSyllabusTab = (tabId) => {
+        // Deactivate all tab buttons
+        const tabBtns = document.querySelectorAll('.modal-tab-btn');
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+
+        // Activate the selected tab button
+        const activeBtn = document.querySelector(`.modal-tab-btn[data-tab="${tabId}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // Hide all tab panes
+        const tabPanes = document.querySelectorAll('.modal-tab-pane');
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+
+        // Show the selected tab pane
+        const activePane = document.getElementById(`tab-${tabId}`);
+        if (activePane) activePane.classList.add('active');
+    };
 });
