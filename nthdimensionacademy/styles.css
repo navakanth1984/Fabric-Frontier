@@ -140,6 +140,7 @@ h2 {
 }
 
 .btn-outline {
+    background: transparent;
     border: 1px solid var(--accent-blue);
     color: var(--accent-blue);
 }
@@ -1537,6 +1538,38 @@ footer {
     .section-header p {
         font-size: 0.95rem !important;
     }
+}
+
+/* Timeline Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    font-size: 9px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-left: 0.75rem;
+    vertical-align: middle;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.status-badge.active {
+    background: rgba(0, 240, 255, 0.15);
+    color: var(--accent-blue);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.status-badge.retired {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-badge.coming {
+    background: rgba(255, 215, 0, 0.15);
+    color: var(--master-gold);
+    border: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 

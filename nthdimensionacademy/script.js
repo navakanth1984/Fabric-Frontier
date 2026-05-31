@@ -277,9 +277,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3D Knowledge Graph Initialization
-    const graphContainer = document.getElementById('3d-graph-container');
-    if (graphContainer && typeof ForceGraph3D !== 'undefined') {
+    // 3D Knowledge Graph Initialization with Self-Healing Retry
+    const init3DGraph = () => {
+        const graphContainer = document.getElementById('3d-graph-container');
+        if (!graphContainer) return;
+
+        if (typeof ForceGraph3D === 'undefined') {
+            console.warn("ForceGraph3D is not loaded yet. Retrying in 200ms...");
+            setTimeout(init3DGraph, 200);
+            return;
+        }
+
+        console.log("ForceGraph3D loaded. Initializing premium 3D neural map...");
+
         const graphData = {
             nodes: [
                 // Core
@@ -366,27 +376,33 @@ document.addEventListener('DOMContentLoaded', () => {
             .graphData(graphData)
             .nodeLabel('name')
             .nodeColor(node => groupColors[node.group] || '#ffffff')
-            .nodeRelSize(6)
+            .nodeVal(node => node.val)
+            .nodeRelSize(3) // Adjusted baseline size for dynamic nodeVal scaling
             .linkColor(link => {
                 const sourceGroup = typeof link.source === 'object' ? link.source.group : graphData.nodes.find(n => n.id === link.source).group;
-                return groupColors[sourceGroup] + '80'; // Add 50% opacity (80 in hex)
+                return groupColors[sourceGroup] + 'A0'; // Add 62% opacity for higher visibility
             })
-            .linkWidth(1.5)
-            .linkDirectionalParticles(2)
-            .linkDirectionalParticleSpeed(0.005)
-            .linkDirectionalParticleWidth(2.5)
-            .linkOpacity(0.4)
-            .backgroundColor('rgba(0,0,0,0)') // Transparent background
+            .linkWidth(2.0) // Thicker links for dynamic tesseract lines
+            .linkDirectionalParticles(3) // Energy particles moving between dimensions
+            .linkDirectionalParticleSpeed(0.007)
+            .linkDirectionalParticleWidth(3.0)
+            .linkOpacity(0.55)
+            .backgroundColor('rgba(5, 7, 15, 0.35)') // Dark translucent background to enhance contrast
+            .showNavInfo(false)
             .onNodeHover(node => graphContainer.style.cursor = node ? 'pointer' : null);
 
         // Auto-rotate
         let angle = 0;
-        setInterval(() => {
+        const rotationInterval = setInterval(() => {
+            if (!document.getElementById('3d-graph-container')) {
+                clearInterval(rotationInterval);
+                return;
+            }
             Graph.cameraPosition({
-                x: 200 * Math.sin(angle),
-                z: 200 * Math.cos(angle)
+                x: 220 * Math.sin(angle),
+                z: 220 * Math.cos(angle)
             });
-            angle += Math.PI / 400; // slightly slower rotation for complex graph
+            angle += Math.PI / 450; // smooth slow-motion tesseract rotation
         }, 30);
 
         // Resize handler
@@ -402,7 +418,10 @@ document.addEventListener('DOMContentLoaded', () => {
             addMessage('user', prompt);
             callNIM(prompt);
         });
-    }
+    };
+
+    // Run the initialization
+    init3DGraph();
 
     // AI Assistant Logic
     const aiAssistant = document.getElementById('ai-assistant');
