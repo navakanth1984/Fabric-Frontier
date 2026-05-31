@@ -37,7 +37,7 @@
     <header class="hero">
         <div class="hero-bg">
             <video autoplay loop muted playsinline style="opacity: 0.12;">
-                <source src="assets/hero_video.mp4" type="video/mp4">
+                <source src="assets/_Maintain_the_3D_hyper-realistic_crystalline_202605061839.mp4" type="video/mp4">
             </video>
         </div>
         <div class="container" style="z-index: 2;">
@@ -225,13 +225,16 @@
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0, 240, 255, 0.08); border-color: rgba(0, 240, 255, 0.25); display: flex; align-items: center; justify-content: center;">
                             <i class="ph-bold ph-git-branch text-hyper-drive-blue" style="font-size: 1.6rem; color: #00f0ff;"></i>
                         </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-700 Masterclass</span>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            DP-700 Masterclass 
+                            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">ACTIVE</span>
+                        </span>
                         <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Microsoft Fabric Data Engineer</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Master the end-to-end data engineering lifecycle in Fabric, from OneLake management and Medallion architecture to real-time analytics and Spark optimization.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
                         <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Elite Master</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-700 Microsoft Fabric Data Engineer curriculum.');">Syllabus</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp700')">Syllabus</button>
                     </div>
                 </div>
 
@@ -241,13 +244,16 @@
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(138, 43, 226, 0.08); border-color: rgba(138, 43, 226, 0.25); display: flex; align-items: center; justify-content: center;">
                             <i class="ph-bold ph-chart-bar text-gradient" style="font-size: 1.6rem;"></i>
                         </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-600 Masterclass</span>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            DP-600 Masterclass 
+                            <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">ACTIVE</span>
+                        </span>
                         <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Implementing Analytics Solutions</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Conducted high-impact training for global squads. Covers Fabric Analytics, Lakehouses, Notebooks, and Power BI enterprise integration for modern ETL squads.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
                         <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Specialist</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-600 Implementing Analytics Solutions curriculum.');">Syllabus</button>
+                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp600')">Syllabus</button>
                     </div>
                 </div>
 
@@ -257,13 +263,35 @@
                         <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0, 240, 255, 0.08); border-color: rgba(0, 240, 255, 0.25); display: flex; align-items: center; justify-content: center;">
                             <i class="ph-bold ph-database text-hyper-drive-blue" style="font-size: 1.6rem; color: #00f0ff;"></i>
                         </div>
-                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: block; margin-bottom: 0.6rem;">DP-203 Masterclass</span>
-                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Azure Data Engineering</h3>
+                        <span class="font-label-caps" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            DP-203 Masterclass 
+                            <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">RETIRED</span>
+                        </span>
+                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; opacity: 0.7;">Azure Data Engineering</h3>
                         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Scalable cloud pipelines, PySpark execution, Delta Lakes, and Medallion architecture deployments inside Synapse, Databricks, and Data Factory.</p>
                     </div>
                     <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
-                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Core Master</span>
-                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openAssistant(); callNIM('Tell me about the DP-203 Azure Data Engineering curriculum.');">Syllabus</button>
+                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Legacy Core</span>
+                        <button class="btn btn-outline-retired" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp203')">Syllabus</button>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 (DP-900 Coming Soon) -->
+                <div class="glass-card holographic-sweep p-8 rounded-xl flex flex-col justify-between" style="min-height: 350px; border-radius: 20px; padding: 2.5rem; border-color: rgba(255, 215, 0, 0.2);">
+                    <div>
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-6 border" style="width: 50px; height: 50px; border-radius: 12px; background: rgba(255, 215, 0, 0.08); border-color: rgba(255, 215, 0, 0.25); display: flex; align-items: center; justify-content: center;">
+                            <i class="ph-bold ph-compass text-master-gold" style="font-size: 1.6rem; color: var(--master-gold);"></i>
+                        </div>
+                        <span class="font-label-caps text-master-gold" style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--master-gold); display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                            DP-900 Masterclass 
+                            <span style="background: rgba(255, 215, 0, 0.15); color: var(--master-gold); border: 1px solid rgba(255, 215, 0, 0.3); padding: 0.1rem 0.4rem; font-size: 9px; border-radius: 4px; font-weight: 700; letter-spacing: 1px;">COMING SOON</span>
+                        </span>
+                        <h3 class="font-headline-md text-white" style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3;">Azure Data Fundamentals</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Master the foundational concepts of cloud data services, relational & non-relational database models, and modern analytics workloads on Azure.</p>
+                    </div>
+                    <div class="flex items-center justify-between" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
+                        <span class="font-label-caps" style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">Level: Foundation</span>
+                        <button class="btn btn-outline-gold" style="padding: 0.5rem 1rem; font-size: 0.8rem; border-radius: 20px;" onclick="openSyllabusModal('dp900')">Syllabus</button>
                     </div>
                 </div>
             </div>
@@ -273,7 +301,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-700: Microsoft Fabric Data Engineer</h3>
+                        <h3>DP-700: Microsoft Fabric Data Engineer <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.15rem 0.5rem; font-size: 10px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; vertical-align: middle; margin-left: 0.5rem;">ACTIVE</span></h3>
                         <span class="duration">2-3 Days Masterclass</span>
                         <p>Flagship advanced orchestration training. Learn to setup Fabric capacity, build robust Medallion architectures inside OneLake, manage security and pipelines with Data Factory, and perform low-latency stream analysis with Real-Time Intelligence.</p>
                     </div>
@@ -282,7 +310,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-600: Microsoft Fabric Analytics Engineer</h3>
+                        <h3>DP-600: Microsoft Fabric Analytics Engineer <span style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.15rem 0.5rem; font-size: 10px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; vertical-align: middle; margin-left: 0.5rem;">ACTIVE</span></h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Conducted comprehensive training sessions for global engineering squads. Covered end-to-end analytics using Lakehouse architectures, Notebooks, and Power BI integration to transition legacy ETL teams to modern Fabric solutions.</p>
                     </div>
@@ -291,7 +319,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-203: Data Engineering on Microsoft Azure</h3>
+                        <h3>DP-203: Data Engineering on Microsoft Azure <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.15rem 0.5rem; font-size: 10px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; vertical-align: middle; margin-left: 0.5rem;">RETIRED</span></h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Delivered in-depth virtual and classroom training on building scalable data pipelines, PySpark, T-SQL, Azure Databricks, and Medallion architecture for enterprise clients and internal teams.</p>
                     </div>
@@ -300,7 +328,7 @@
                 <div class="timeline-item reveal">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content glass-panel">
-                        <h3>DP-900: Azure Data Fundamentals</h3>
+                        <h3>DP-900: Azure Data Fundamentals <span style="background: rgba(255, 215, 0, 0.15); color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.3); padding: 0.15rem 0.5rem; font-size: 10px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; vertical-align: middle; margin-left: 0.5rem;">COMING SOON</span></h3>
                         <span class="duration">1-2 Days Masterclass</span>
                         <p>Led foundational workshops and masterclasses for cross-functional teams, college graduates, and new hires, introducing core cloud data concepts.</p>
                     </div>
@@ -453,6 +481,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Syllabus Modal (Dynamically populated by script.js) -->
+    <div id="syllabus-modal" class="hidden" style="position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.75); backdrop-filter: blur(12px);">
+        <div class="glass-panel" style="width: 90%; max-width: 860px; max-height: 85vh; overflow-y: auto; border-radius: 24px; padding: 2.5rem; border-color: rgba(255, 215, 0, 0.2); position: relative; background: rgba(5,7,15,0.95);">
+            <button onclick="closeSyllabusModal()" style="position: absolute; top: 1.2rem; right: 1.2rem; background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer; z-index: 10;"><i class="ph ph-x"></i></button>
+            <div style="margin-bottom: 1.5rem;">
+                <span id="modal-trust-pill" class="font-label-caps text-master-gold" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 0.5rem;"></span>
+                <h2 id="modal-title" style="font-size: 1.8rem; font-weight: 700; color: white; line-height: 1.3;"></h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; padding: 1rem; background: rgba(0,240,255,0.03); border-radius: 12px; border: 1px solid rgba(0,240,255,0.1);">
+                <div><span class="font-label-caps" style="font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block;">Exam</span><span id="modal-ref-exam" style="color: white; font-weight: 600; font-size: 0.9rem;"></span></div>
+                <div><span class="font-label-caps" style="font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block;">Credential</span><span id="modal-ref-credential" style="color: white; font-weight: 600; font-size: 0.9rem;"></span></div>
+                <div><span class="font-label-caps" style="font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block;">Level</span><span id="modal-ref-level" style="color: white; font-weight: 600; font-size: 0.9rem;"></span></div>
+                <div><span class="font-label-caps" style="font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; display: block;">Cost</span><span id="modal-ref-cost" style="color: white; font-weight: 600; font-size: 0.9rem;"></span></div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.75rem;">
+                <button class="modal-tab-btn active" data-tab="overview" onclick="switchSyllabusTab('overview')">Overview</button>
+                <button class="modal-tab-btn" data-tab="tracks" onclick="switchSyllabusTab('tracks')">Tracks</button>
+                <button class="modal-tab-btn" data-tab="labs" onclick="switchSyllabusTab('labs')">Labs</button>
+            </div>
+            <div id="tab-overview" class="modal-tab-pane active">
+                <h4 style="color: var(--master-gold); font-weight: 700; margin-bottom: 0.75rem;">Exam Domain Weights</h4>
+                <ul id="modal-weight-list" style="list-style: none; padding: 0; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;"></ul>
+                <h4 style="color: var(--master-gold); font-weight: 700; margin-bottom: 0.75rem;">Curriculum Overview</h4>
+                <div id="modal-overview-desc" style="color: var(--text-muted); line-height: 1.6;"></div>
+            </div>
+            <div id="tab-tracks" class="modal-tab-pane">
+                <h4 style="color: var(--master-gold); font-weight: 700; margin-bottom: 1rem;">Learning Tracks</h4>
+                <div id="modal-tracks-container" style="display: grid; gap: 1rem;"></div>
+            </div>
+            <div id="tab-labs" class="modal-tab-pane">
+                <h4 style="color: var(--master-gold); font-weight: 700; margin-bottom: 1rem;">Hands-On Labs</h4>
+                <div id="modal-labs-container" style="display: grid; gap: 0.75rem;"></div>
+            </div>
+            <div style="margin-top: 2rem; text-align: center;">
+                <button onclick="beginSyllabusAscent()" class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 0.95rem;">Begin Your Ascent <i class="ph-bold ph-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
 
     <!-- AI Assistant: Cosmic Guide (Styled with Glassmorphic Dimension Purple) -->
     <div id="ai-assistant" class="ai-assistant hidden">

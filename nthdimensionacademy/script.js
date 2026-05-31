@@ -906,6 +906,56 @@ document.addEventListener('DOMContentLoaded', () => {
                     desc: "Provision Synapse spaces, configure Synapse pipelines to ingest Blob data, and load curated tables."
                 }
             ]
+        },
+        dp203: {
+            trustPill: "DP-203 RETIRED CURRICULUM",
+            title: "Azure Data Engineering Legacy",
+            status: "retired",
+            statusText: "Retired",
+            exam: "Exam DP-203",
+            credential: "Microsoft Certified: Azure Data Engineer Associate",
+            level: "Legacy Core",
+            cost: "$165 USD",
+            weights: [
+                { topic: "Design & Implement Data Storage", weight: "40–45%" },
+                { topic: "Develop Data Processing", weight: "25–30%" },
+                { topic: "Secure, Monitor & Optimize Data Storage", weight: "30–35%" }
+            ],
+            description: [
+                "Led by Master Consultant and Microsoft Certified Trainer (M MCT) <strong>Navakanth Reddy Dumpa</strong>, this legacy curriculum was highly successful, helping hundreds of engineers master Azure Databricks, Azure Synapse Analytics, and Azure Data Factory pipelines.",
+                "<strong>Syllabus Status:</strong> This course is now retired as Microsoft Fabric (DP-700 / DP-600) transitions organizations to a unified SaaS lakehouse paradigm. However, the foundational modules are kept here for historical reference."
+            ],
+            tracks: [
+                {
+                    title: "💾 Track 1: Data Storage & Infrastructure Architectures",
+                    desc: "Implement partition schemes, configure ADLS Gen2 directory hierarchies, and design premium security layers inside Azure Synapse dedicated SQL pools."
+                },
+                {
+                    title: "⚙️ Track 2: Large-Scale PySpark Transformation",
+                    desc: "Develop advanced spark transformations using Databricks notebooks, manage DBFS storage options, optimize cluster configurations, and manage delta tables."
+                },
+                {
+                    title: "🚀 Track 3: Batch and Streaming Pipelines",
+                    desc: "Build hybrid batch loading patterns using Azure Data Factory pipelines, integrate Azure Key Vault secrets, and process streaming data with Azure Stream Analytics."
+                }
+            ],
+            labs: [
+                {
+                    num: "LAB 01",
+                    title: "Azure Databricks Data Wrangling at Scale",
+                    desc: "Create clusters, load massive CSV files, apply schemas, and clean columns using high-performance Spark SQL operations."
+                },
+                {
+                    num: "LAB 02",
+                    title: "Build Synapse Dedicated SQL Pool Warehouses",
+                    desc: "Design hash-distributed and replicated dimension tables, partition fact tables, and execute COPY statements for fast loading."
+                },
+                {
+                    num: "LAB 03",
+                    title: "Deploy End-to-End Orchestrated pipelines in ADF",
+                    desc: "Construct parameterized pipelines, map copy data activities, and configure self-hosted integration runtimes."
+                }
+            ]
         }
     };
 
