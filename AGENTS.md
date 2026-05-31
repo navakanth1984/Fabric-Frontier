@@ -47,3 +47,11 @@ Do NOT use --no-verify for Python file commits. Fix the dependency
 issue in AutoGrade_Backend and dead_loop_trailer before the next
 Python commit on any branch.
 
+---
+
+## Large Asset Tracking & Git LFS
+To prevent repository bloating and push failures:
+- Any single binary asset (e.g. `.mp4`, `.mov`, `.png`, `.jpeg`, `.zip`) with file size exceeding **50 MB** MUST be tracked using Git LFS (Large File Storage) instead of regular `git add`.
+- Do not commit large generated media assets directly to standard Git history unless explicitly verified to be under the 50 MB threshold.
+
+
