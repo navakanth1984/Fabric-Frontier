@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', onScroll);
     }
 
+    // Consolidated Parallax Engine (compliant with Karpathy P6 Bloat Audit)
     // Immersive 3D Parallax & Gyroscopic Motion (Unified Single-Point of Truth)
     let parallaxRaf              = null;
     let currentParallaxX         = 0;
