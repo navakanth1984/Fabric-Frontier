@@ -67,3 +67,14 @@ Never use "append below" as an edit strategy for content that replaces
 existing content. Append-without-delete has caused duplicate IDs,
 duplicate nodes, duplicate tab buttons, and duplicate variable
 declarations across multiple sessions.
+
+---
+
+## Branch discipline
+When fixing a bug on the production site (nthdimensionacademy.com):
+1. Always work on `main` — that is the deployed branch.
+2. If a count or verification does not match expectations, do NOT
+   switch branches. Investigate the current file first.
+3. Never run verification commands across multiple branches to find
+   a "clean" version — that is not fixing, that is hiding.
+
