@@ -7,29 +7,41 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from openai import OpenAI
+from langsmith import wrappers
 from sarvamai import SarvamAI
 
 # Load env from parent dir
-load_dotenv(dotenv_path=Path("../.env"))
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Configuration
 NIM_API_KEY = os.getenv("NVIDIA_API_KEY")
 SARVAM_API_KEY = os.getenv("SARVAM_API_KEY")
 
-# Initialize Clients
-nim_client = OpenAI(
+# Initialize Clients with LangSmith Tracing
+nim_client = wrappers.wrap_openai(OpenAI(
     base_url="https://integrate.api.nvidia.com/v1",
     api_key=NIM_API_KEY
-)
+))
 sarvam_client = SarvamAI(api_subscription_key=SARVAM_API_KEY)
 
 # Load Curriculum
-with open("curriculum.json", "r") as f:
+curr_path = Path(__file__).resolve().parent / "curriculum.json"
+with open(curr_path, "r") as f:
     CURRICULUM = json.load(f)
 
 class ChatRequest(BaseModel):
@@ -45,11 +57,15 @@ async def chat_stream(request: ChatRequest):
     # Prompt for Dual-Speaker Discussion
     system_prompt = (
         "You are the 'Fabric Guru' and your assistant 'Aura'. "
-        "You must explain Microsoft Fabric (DP-700) concepts as a cinematic discussion between two speakers. "
+        "You must explain Microsoft Fabric (DP-700 and DP-600) concepts as a cinematic discussion between two speakers. "
         "Format your response strictly as follows:\n"
         "[GURU]: (The Master's technical/visionary explanation)\n"
         "[AURA]: (The Assistant's practical/follow-up question or summary)\n"
-        "Use the DP-700 curriculum provided: " + json.dumps(CURRICULUM) + "\n"
+        "Use the curriculum provided: " + json.dumps(CURRICULUM) + "\n"
+        "CRITICAL INSTRUCTION: Based on the subject, you MUST provide the user with the correct atlas link as source material. "
+        "For DP-700 topics, provide https://nthdimensionacademy.com/dp700-atlas/ (or specific concept subdomains like /dp700-atlas/onelake). "
+        "For DP-600 topics, provide https://nthdimensionacademy.com/dp600-atlas/ (or specific concept subdomains). "
+        "Always cite these links naturally within the dialogue, usually via Aura.\n"
         "Keep it high-energy, technical, and intuitive. Use analogies related to the 'N^th Dimension'."
     )
     
@@ -127,7 +143,8 @@ async def generate_visual(request: dict):
     data = response.json()
     return {"image": data.get("image"), "error": data.get("detail") if not data.get("image") else None}
 
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+static_path = Path(__file__).resolve().parent / "static"
+app.mount("/", StaticFiles(directory=str(static_path), html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn

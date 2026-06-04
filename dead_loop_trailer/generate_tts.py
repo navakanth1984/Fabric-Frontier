@@ -1,7 +1,7 @@
 import sys
 import os
-import soundfile as sf
-from kokoro_onnx import Kokoro
+import soundfile as sf  # pyrefly: ignore [missing-import]
+from kokoro_onnx import Kokoro  # pyrefly: ignore [missing-import]
 
 # Paths to models
 MODEL_PATH = r"C:\Users\navka\.cache\hyperframes\tts\models\kokoro-v1.0.onnx"

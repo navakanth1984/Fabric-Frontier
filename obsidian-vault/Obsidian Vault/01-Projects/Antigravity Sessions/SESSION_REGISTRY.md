@@ -14,6 +14,7 @@
 
 | ID | Date | Project | Summary | Tool | Link |
 |----|------|---------|---------|------|------|
+| S-005 | 2026-06-04 | dp700-tutor | Fixed CORS preflight errors on tutor backend port 8004 | Antigravity CLI | [[S-005_2026-06-04_fix-backend-cors-port-8004]] |
 | S-004 | 2026-06-04 | nth-dimension-react | GLB loader, Spline Embed, Meshy prompts & backend proxies | Antigravity CLI | [[S-004_2026-06-04_glb-loader-and-spline]] |
 | S-003 | 2026-06-04 | nth-dimension-react | Interactive 3D upgrade (Solar, Atom, Molecule switchers) & deployment | Antigravity CLI | [[S-003_2026-06-04_quantum-3d-visualizer]] |
 | S-002 | 2026-06-04 | nth-dimension-react | React migration & 3D Neural Navigator full migration | Antigravity CLI | [[S-002_2026-06-04_react-migration]] |

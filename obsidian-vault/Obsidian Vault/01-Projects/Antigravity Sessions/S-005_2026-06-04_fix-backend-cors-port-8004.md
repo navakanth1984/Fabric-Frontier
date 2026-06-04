@@ -1,0 +1,44 @@
+---
+session_id: "S-005"
+date: "2026-06-04"
+project: "dp700-tutor"
+tool: "Antigravity CLI"
+status: "✅ Completed"
+tags: [session, handoff, cors, fastapi, backend]
+---
+
+# Session S-005 — Fix Backend CORS on Port 8004
+
+## Context
+- **Project**: dp700-tutor (Fabric-Frontier backend)
+- **Tool Used**: Antigravity CLI
+- **Branch**: `main`
+- **Duration**: ~0.5 hours
+
+## What Was Accomplished
+1. **Added CORS Middleware**: Configured `CORSMiddleware` in `dp700-tutor/tutor_backend.py` to allow cross-origin browser requests (e.g. from local port 5173, local port 5500, or raw file links) directly to port 8004.
+2. **Fixed Pyrefly Config**: Updated the Python interpreter path in `pyrefly.toml` to point to Python 3.12 (where packages like `fastapi` and `requests` are installed), resolving interpreter mismatch and check errors.
+3. **Restarted Tutor Backend**: Killed the previous FastAPI/uvicorn task (`task-724`) and started the updated backend (`task-838`) on port 8004.
+
+## Current File States
+| File | Status | Notes |
+|------|--------|-------|
+| `dp700-tutor/tutor_backend.py` | ✅ Completed | Imports and registers FastAPI `CORSMiddleware`. |
+| `pyrefly.toml` | ✅ Completed | Configures correct interpreter path for Python 3.12. |
+
+## Pending / Next Steps
+- [ ] Verify frontend chat functionality on local preview pages.
+
+## Key Decisions Made
+- Enabled wildcard (`"*"`) allowed origins in local FastAPI CORS middleware to allow static pages hosted on random dev ports to hit the tutor backend.
+
+## Files Modified
+```
+dp700-tutor/tutor_backend.py
+pyrefly.toml
+```
+
+## Resume Instructions
+> When continuing this session, start by:
+> 1. Verify the Python backend is running on port 8004: `py dp700-tutor/tutor_backend.py`.
+> 2. Open local client site (either React app on port 5173 or static site) and check chat connectivity.

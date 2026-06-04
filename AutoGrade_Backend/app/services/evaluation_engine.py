@@ -1,7 +1,7 @@
-import sympy
+import sympy  # pyrefly: ignore [missing-import]
 import re
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer  # pyrefly: ignore [missing-import]
+from sklearn.metrics.pairwise import cosine_similarity  # pyrefly: ignore [missing-import]
 from typing import List, Optional
 from ..models.schemas import OCRBlock, QuestionEvaluation, EvaluationResponse, MarkAnnotation, Coordinate
 
