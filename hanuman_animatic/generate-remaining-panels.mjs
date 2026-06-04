@@ -13,7 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 
-const SARVAM_KEY = 'sk_gv5b8wyc_4OCnebfWVHGJsGMr7Pp7IGr2';
+const SARVAM_KEY = process.env.SARVAM_API_KEY || 'sk_gv5b8wyc_4OCnebfWVHGJsGMr7Pp7IGr2';
 const ASSETS_DIR = path.resolve('./assets');
 
 // Remaining panels to generate

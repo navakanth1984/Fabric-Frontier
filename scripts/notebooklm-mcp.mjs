@@ -266,7 +266,7 @@ server.registerTool(
     const date = new Date().toISOString().split("T")[0];
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     const filename = `${date}-${slug}.md`;
-    const vaultDir = "C:\\Users\\navka\\OneDrive\\Documents\\Obsidian Vault\\01-Projects\\AI-Automation";
+    const vaultDir = "c:\\Users\\navka\\navakanth001\\obsidian-vault\\Obsidian Vault\\01-Projects\\AI-Automation";
     const filepath = path.join(vaultDir, filename);
 
     const tagsList = ["notebooklm", "ai-automation", ...tags].map(t => `"${t}"`).join(", ");

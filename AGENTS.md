@@ -1,3 +1,30 @@
+## Session Continuity Protocol (Cross-Tool)
+All AI agents (Antigravity CLI, Antigravity IDE, Claude Code, etc.) MUST follow this protocol.
+
+### On Session Start
+When the user says "continue", "restart", "pick up", or "resume":
+1. Read `obsidian-vault/Obsidian Vault/01-Projects/Antigravity Sessions/SESSION_REGISTRY.md`
+2. List the **Active Sessions** table to the user
+3. If only one active session exists, auto-resume it; otherwise ask which to resume
+4. Read the linked handoff note for full context and follow its **Resume Instructions**
+
+### On Session End
+Before ending any session that involved code changes:
+1. Create or update a handoff note using `_HANDOFF_TEMPLATE.md` in the same folder
+2. Update `SESSION_REGISTRY.md` — add new sessions, move completed ones to the Completed table
+3. Use naming: `S-{NNN}_{YYYY-MM-DD}_{slug}.md` (next ID is in the registry)
+
+### Registry Location
+```
+obsidian-vault/Obsidian Vault/01-Projects/Antigravity Sessions/
+├── SESSION_REGISTRY.md        ← Master index (read first)
+├── _HANDOFF_TEMPLATE.md       ← Template for new notes
+├── S-001_2026-06-01_*.md      ← Individual session notes
+└── S-002_2026-06-04_*.md
+```
+
+---
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.

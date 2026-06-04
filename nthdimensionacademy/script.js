@@ -401,20 +401,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const Graph = ForceGraph3D()(graphContainer)
             .graphData(graphData)
-            .nodeLabel('name')
-            .nodeColor(node => groupColors[node.group] || '#ffffff')
-            .nodeVal(node => node.val)
-            .nodeRelSize(3) // Adjusted baseline size for dynamic nodeVal scaling
+            .nodeThreeObject(node => {
+                if (typeof THREE === 'undefined' || typeof SpriteText === 'undefined') return false;
+                const group = new THREE.Group();
+                const nodeColor = groupColors[node.group] || '#ffffff';
+                const baseSize = node.val / 3.5;
+                
+                // Luminous Transparent Planet (Core)
+                const geometry = new THREE.SphereGeometry(baseSize, 32, 32);
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: nodeColor,
+                    transparent: true,
+                    opacity: 0.55,
+                    blending: THREE.AdditiveBlending
+                });
+                const sphere = new THREE.Mesh(geometry, material);
+                
+                // Outer Atmosphere / Halo
+                const atmosphereGeom = new THREE.SphereGeometry(baseSize * 1.3, 32, 32);
+                const atmosphereMat = new THREE.MeshBasicMaterial({
+                    color: nodeColor,
+                    transparent: true,
+                    opacity: 0.15,
+                    blending: THREE.AdditiveBlending,
+                    side: THREE.BackSide
+                });
+                const atmosphere = new THREE.Mesh(atmosphereGeom, atmosphereMat);
+
+                // Tech Wireframe Orbit
+                const wireGeom = new THREE.SphereGeometry(baseSize * 1.4, 16, 16);
+                const wireMat = new THREE.MeshBasicMaterial({
+                    color: nodeColor,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.25,
+                    blending: THREE.AdditiveBlending
+                });
+                const wireSphere = new THREE.Mesh(wireGeom, wireMat);
+                
+                group.add(sphere);
+                group.add(atmosphere);
+                group.add(wireSphere);
+                
+                // Floating Text Label
+                const sprite = new SpriteText(node.name);
+                sprite.color = nodeColor;
+                sprite.textHeight = 4.5;
+                sprite.fontFace = 'Outfit, sans-serif';
+                sprite.fontWeight = '600';
+                sprite.position.y = -(baseSize + 6); // Position below the sphere
+                group.add(sprite);
+                
+                return group;
+            })
+            .enableNodeDrag(false)
+            .enableNavigationControls(false)
             .linkColor(link => {
                 const sourceGroup = typeof link.source === 'object' ? link.source.group : graphData.nodes.find(n => n.id === link.source).group;
-                return groupColors[sourceGroup] + 'A0'; // Add 62% opacity for higher visibility
+                return groupColors[sourceGroup] + 'A0';
             })
-            .linkWidth(2.0) // Thicker links for dynamic tesseract lines
-            .linkDirectionalParticles(3) // Energy particles moving between dimensions
-            .linkDirectionalParticleSpeed(0.007)
-            .linkDirectionalParticleWidth(3.0)
-            .linkOpacity(0.55)
-            .backgroundColor('rgba(5, 7, 15, 0.35)') // Dark translucent background to enhance contrast
+            .linkWidth(1.5)
+            .linkDirectionalParticles(4)
+            .linkDirectionalParticleSpeed(0.008)
+            .linkDirectionalParticleWidth(2.5)
+            .linkOpacity(0.5)
+            .backgroundColor('rgba(5, 7, 15, 0.35)')
             .showNavInfo(false)
             .onNodeHover(node => graphContainer.style.cursor = node ? 'pointer' : null);
 
@@ -438,8 +489,16 @@ document.addEventListener('DOMContentLoaded', () => {
             Graph.height(graphContainer.clientHeight);
         });
 
-        // Link Graph Node Clicks to AI Assistant
+        // Link Graph Node Clicks to AI Assistant or Atlas Pages
         Graph.onNodeClick(node => {
+            if (node.id === 'DP-700') {
+                window.location.href = 'https://nthdimensionacademy.com/dp700-atlas/';
+                return;
+            }
+            if (node.id === 'DP-600') {
+                window.location.href = 'https://nthdimensionacademy.com/dp600-atlas/';
+                return;
+            }
             openAssistant();
             const prompt = `Tell me more about ${node.name}. What is its role in Microsoft Fabric and the Nth Dimension?`;
             addMessage('user', prompt);
@@ -488,35 +547,58 @@ document.addEventListener('DOMContentLoaded', () => {
             chatMessages.appendChild(thinkingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            const response = await fetch('http://localhost:8000/api/chat', {
+            const response = await fetch('http://localhost:8004/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text, history: chatHistory })
+                body: JSON.stringify({ message: text, lang: "en" })
             });
-            
+
             // Remove Thinking state
             thinkingDiv.remove();
 
-            const data = await response.json();
-            
-            // Parse for Actions
-            const actionMatch = data.response.match(/\[ACTION:(.*?)\]/);
-            if (actionMatch) {
-                const action = actionMatch[1];
-                handleUIAction(action);
-                const cleanResponse = data.response.replace(/\[ACTION:.*?\]/g, '').trim();
-                addMessage('system', cleanResponse);
-            } else {
-                addMessage('system', data.response);
+            if (!response.ok) throw new Error("Backend connection failed.");
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let fullResponse = "";
+
+            // Create a new message div for the streaming text
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message system';
+            const pTag = document.createElement('p');
+            msgDiv.appendChild(pTag);
+            chatMessages.appendChild(msgDiv);
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                const chunk = decoder.decode(value, { stream: true });
+                const lines = chunk.split('\n');
+                
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const data = JSON.parse(line.slice(6));
+                            if (data.content) {
+                                fullResponse += data.content;
+                                pTag.innerHTML = fullResponse.replace(/\n/g, '<br>');
+                                chatMessages.scrollTop = chatMessages.scrollHeight;
+                            }
+                        } catch (e) {
+                            console.warn("Failed to parse chunk", line);
+                        }
+                    }
+                }
             }
 
             chatHistory.push({ role: 'user', content: text });
-            chatHistory.push({ role: 'assistant', content: data.response });
+            chatHistory.push({ role: 'assistant', content: fullResponse });
         } catch (error) {
             console.error('NIM Error:', error);
             const thinking = chatMessages.querySelector('.thinking');
             if(thinking) thinking.remove();
-            addMessage('system', "Apologies, Voyager. The dimensional link is unstable. Please ensure the backend is running.");
+            addMessage('system', "Apologies, Voyager. The dimensional link is unstable. Please ensure the backend is running on port 8004.");
         }
     };
 
@@ -619,15 +701,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const synthesizeVoice = async (text) => {
         try {
             addMessage('system', "Synthesizing voice in the Nth Dimension...");
-            const response = await fetch('http://localhost:8000/api/voice', {
+            const response = await fetch('http://localhost:8004/speak', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: text, target_language: "te-IN" }) // Default to Telugu as per Multilingual Tutor goal
+                body: JSON.stringify({ text: text, lang: "te" }) // Default to Telugu as per Multilingual Tutor goal
             });
             const data = await response.json();
-            if (data.audio_urls) {
-                const audio = new Audio(data.audio_urls[0]);
-                audio.play();
+            if (data.segments) {
+                // Play segments sequentially
+                let i = 0;
+                const playNext = () => {
+                    if (i < data.segments.length) {
+                        const audio = new Audio(data.segments[i].audio);
+                        audio.onended = playNext;
+                        audio.play();
+                        i++;
+                    }
+                };
+                playNext();
             }
         } catch (error) {
             console.error('Voice Error:', error);

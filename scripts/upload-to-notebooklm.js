@@ -25,6 +25,7 @@ const NOTEBOOK_NAME = args.name || `Notebook ${new Date().toLocaleDateString()}`
 const URLS_FILE = args['urls-file'];
 const SINGLE_URL = args.url;
 const BATCH_SIZE = parseInt(args['batch-size'] || '5');
+const HEADLESS = args.headless === 'true' || process.env.HEADLESS === 'true';
 
 // Chrome profile — already logged into Google
 const CHROME_USER_DATA = 'C:\\Users\\navka\\AppData\\Local\\Google\\Chrome\\User Data';
@@ -64,7 +65,7 @@ async function launchBrowser() {
   console.log(`Browser: ${executablePath ? 'Google Chrome' : 'Playwright Chromium'}\n`);
 
   const browser = await chromium.launchPersistentContext(tempProfile, {
-    headless: false,
+    headless: HEADLESS,
     executablePath,
     args: [
       '--no-first-run',
@@ -86,6 +87,12 @@ async function goToNotebookLM(context) {
 
   const url = page.url();
   if (url.includes('accounts.google.com')) {
+    if (HEADLESS) {
+      console.error('\n❌ ERROR: Google login is required, but the browser is running in headless mode.');
+      console.error('Please run the upload script WITHOUT "--headless true" first to log in manually:');
+      console.error('  node scripts/upload-to-notebooklm.js --name "My Notebook" --url "https://youtube.com/watch?v=..."\n');
+      throw new Error('Google authentication required in headed mode.');
+    }
     console.log('\nStill redirected to login page.');
     console.log('Please sign in manually in the browser window that opened.');
     console.log('Waiting up to 2 minutes for you to log in...\n');
