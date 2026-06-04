@@ -8,7 +8,9 @@
 
 ## 🟡 Active Sessions
 
-*None*
+| ID | Date | Project | Summary | Tool | Link |
+|----|------|---------|---------|------|------|
+| S-004 | 2026-06-04 | nth-dimension-react | GLB loader, Spline Embed, and Meshy prompts implementation | Antigravity CLI | [[S-004_2026-06-04_glb-loader-and-spline]] |
 
 ## ✅ Completed Sessions
 
