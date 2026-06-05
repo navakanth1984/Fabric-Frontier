@@ -1,7 +1,7 @@
 #!/bin/bash
 # Fires on every Claude Code agent stop.
 # 1. Logs timestamped entry to today's session file.
-# 2. If FABRIC_PAT is set, commits any untracked files and pushes.
+# 2. If GITHUB_TOKEN is set, commits any untracked files and pushes.
 
 set -euo pipefail
 
@@ -22,9 +22,9 @@ printf "## Stop event — %s\n\nAgent stopped.\n\n" "$TIME" >> "$LOG_FILE"
 # --- 2. Auto-commit untracked/modified files and push ---
 cd "$REPO_ROOT"
 
-# Wire remote if FABRIC_PAT is available
-if [ -n "${FABRIC_PAT:-}" ]; then
-  git remote set-url origin "https://${FABRIC_PAT}@github.com/navakanth1984/Fabric-Frontier.git"
+# Wire remote if GITHUB_TOKEN is available
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+  git remote set-url origin "https://${GITHUB_TOKEN}@github.com/navakanth1984/Fabric-Frontier.git"
 fi
 
 # Stage any untracked or modified files (excluding .env and secrets)
@@ -38,11 +38,11 @@ fi
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 UNPUSHED=$(git log "origin/${BRANCH}..HEAD" --oneline 2>/dev/null || true)
 if [ -n "$UNPUSHED" ]; then
-  if [ -n "${FABRIC_PAT:-}" ]; then
+  if [ -n "${GITHUB_TOKEN:-}" ]; then
     git push -u origin "$BRANCH" && echo "[stop-hook] Pushed to ${BRANCH}." \
-      || echo "[stop-hook] Push failed. Check FABRIC_PAT has Contents: write scope."
+      || echo "[stop-hook] Push failed. Check GITHUB_TOKEN has Contents: write scope."
   else
-    echo "[stop-hook] WARNING: ${BRANCH} has unpushed commits but FABRIC_PAT is not set."
-    echo "  Add FABRIC_PAT to session env vars to enable auto-push."
+    echo "[stop-hook] WARNING: ${BRANCH} has unpushed commits but GITHUB_TOKEN is not set."
+    echo "  Add GITHUB_TOKEN to session env vars to enable auto-push."
   fi
 fi

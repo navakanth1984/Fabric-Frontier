@@ -122,10 +122,10 @@ The `GITHUB_TOKEN` env var has zero OAuth scopes. Both `git push` and the GitHub
 ### One-time fix (do this once)
 1. Go to github.com → Settings → Developer Settings → Fine-grained tokens
 2. Create a token: repo = `navakanth1984/Fabric-Frontier`, permission = **Contents: Read and write**
-3. In the Claude Code web session environment settings, add: `FABRIC_PAT=<token>`
+3. In the Claude Code web session environment settings, add: `GITHUB_TOKEN=<token>`
 
 ### How it works after setup
-- The stop hook (`.claude/hooks/stop-save-memory.sh`) auto-wires the git remote using `FABRIC_PAT` and pushes any unpushed commits on every agent stop.
+- The stop hook (`.claude/hooks/stop-save-memory.sh`) auto-wires the git remote using `GITHUB_TOKEN` and pushes any unpushed commits on every agent stop.
 - The session-start hook (`.claude/hooks/session-start.sh`) can be run manually to verify access: `bash .claude/hooks/session-start.sh`
 - The `/ship` command also triggers the same remote-wiring before pushing.
 
@@ -133,7 +133,7 @@ The `GITHUB_TOKEN` env var has zero OAuth scopes. Both `git push` and the GitHub
 ```bash
 bash .claude/hooks/session-start.sh   # shows push access status
 git remote -v                          # check remote URL
-echo $FABRIC_PAT | head -c 20         # confirm token is set
+echo $GITHUB_TOKEN | head -c 20         # confirm token is set
 ```
 
 ---
