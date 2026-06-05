@@ -1000,9 +1000,10 @@ footer {
     right: 30px;
     width: 380px;
     height: 550px;
+    max-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
-    z-index: 1000;
+    z-index: 9999;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 1;
     transform: scale(1);
