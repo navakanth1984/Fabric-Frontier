@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent OS — Navakanth's Command Center</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  h1 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .subtitle { color: var(--muted); margin-bottom: 28px; font-size: 13px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .card h2 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .stat { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .stat-label { color: var(--text); }
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #21262d;
+  }
+  .badge.green { color: var(--green); }
+  .badge.yellow { color: var(--yellow); }
+  .badge.red { color: var(--red); }
+  .badge.blue { color: var(--accent); }
+
+  .cmd-list { list-style: none; }
+  .cmd-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmd-list li:last-child { border-bottom: none; }
+  .cmd-name { font-family: monospace; color: var(--accent); font-size: 13px; }
+  .cmd-desc { color: var(--muted); font-size: 12px; text-align: right; max-width: 160px; }
+
+  .mcp-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.on { background: var(--green); }
+  .dot.off { background: var(--red); }
+  .dot.idle { background: var(--yellow); }
+  .mcp-name { flex: 1; }
+  .mcp-status { color: var(--muted); font-size: 12px; }
+
+  .hook-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .hook-label { color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+
+  .tag { display: inline-block; background: #21262d; color: var(--accent); border-radius: 4px; padding: 2px 7px; font-size: 11px; margin: 2px; }
+
+  footer { margin-top: 32px; text-align: center; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Agent OS — Command Center</h1>
+<p class="subtitle">Navakanth Reddy Dumpa · Fabric-Frontier · Last updated: 2026-06-05</p>
+
+<div class="grid">
+
+  <!-- Project Status -->
+  <div class="card">
+    <h2>Project Status</h2>
+    <div class="stat"><span class="stat-label">Repo</span><span class="badge blue">fabric-frontier</span></div>
+    <div class="stat"><span class="stat-label">Branch</span><span class="badge blue">claude/clever-archimedes-wCWJX</span></div>
+    <div class="stat"><span class="stat-label">Stack</span><span class="badge blue">Python · JS · No-code</span></div>
+    <div class="stat"><span class="stat-label">Platform</span><span class="badge green">Windows 11 + Remote Container</span></div>
+    <div class="stat"><span class="stat-label">Memory OS</span><span class="badge green">Active</span></div>
+    <div class="stat"><span class="stat-label">Stop Hook</span><span class="badge green">Wired</span></div>
+  </div>
+
+  <!-- Slash Commands -->
+  <div class="card">
+    <h2>Slash Commands</h2>
+    <ul class="cmd-list">
+      <li><span class="cmd-name">/ship</span><span class="cmd-desc">Stage, commit &amp; push</span></li>
+      <li><span class="cmd-name">/compact-memory</span><span class="cmd-desc">Summarize session → long-term</span></li>
+      <li><span class="cmd-name">/morning-routine</span><span class="cmd-desc">Daily check-in</span></li>
+      <li><span class="cmd-name">/forge</span><span class="cmd-desc">Capture note → Obsidian Inbox</span></li>
+      <li><span class="cmd-name">/experiment</span><span class="cmd-desc">New experiment note</span></li>
+      <li><span class="cmd-name">/notebooklm</span><span class="cmd-desc">NotebookLM workflow</span></li>
+      <li><span class="cmd-name">/deep-research</span><span class="cmd-desc">Multi-source research report</span></li>
+      <li><span class="cmd-name">/code-review</span><span class="cmd-desc">Review current diff</span></li>
+      <li><span class="cmd-name">/security-review</span><span class="cmd-desc">Security audit of branch</span></li>
+    </ul>
+  </div>
+
+  <!-- MCP Servers -->
+  <div class="card">
+    <h2>MCP Servers</h2>
+    <div class="mcp-row"><div class="dot idle"></div><span class="mcp-name">notebooklm</span><span class="mcp-status">disabled (local)</span></div>
+    <div class="mcp-row"><div class="dot idle"></div><span class="mcp-name">firecrawl</span><span class="mcp-status">disabled (local)</span></div>
+    <div class="mcp-row"><div class="dot idle"></div><span class="mcp-name">pinecone</span><span class="mcp-status">disabled (local)</span></div>
+    <div class="mcp-row"><div class="dot idle"></div><span class="mcp-name">local-llm</span><span class="mcp-status">disabled (local)</span></div>
+    <div class="mcp-row"><div class="dot on"></div><span class="mcp-name">github</span><span class="mcp-status">active (web session)</span></div>
+    <div class="mcp-row"><div class="dot on"></div><span class="mcp-name">Google Drive</span><span class="mcp-status">active (web session)</span></div>
+    <div class="mcp-row"><div class="dot on"></div><span class="mcp-name">Microsoft Learn</span><span class="mcp-status">active (web session)</span></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Keys secured via <code>${ENV_VAR}</code> references in .mcp.json</p>
+  </div>
+
+  <!-- Stop Hook -->
+  <div class="card">
+    <h2>Stop Hook</h2>
+    <div class="hook-label">Fires on every agent stop →</div>
+    <div class="hook-block">memory_os/session_memory/session_YYYY-MM-DD.md</div>
+    <div class="hook-label">Location</div>
+    <div class="hook-block">.claude/hooks/stop-save-memory.sh</div>
+    <div class="stat" style="margin-top:10px"><span class="stat-label">Status</span><span class="badge green">Active</span></div>
+  </div>
+
+  <!-- Memory OS -->
+  <div class="card">
+    <h2>Memory OS</h2>
+    <div class="stat"><span class="stat-label">Session logs</span><span class="badge blue">memory_os/session_memory/</span></div>
+    <div class="stat"><span class="stat-label">Long-term</span><span class="badge blue">memory_os/long_term_knowledge/</span></div>
+    <div class="stat"><span class="stat-label">Profile</span><span class="badge blue">memory_os/strategic_profile.md</span></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Use <code>/compact-memory</code> to distill session logs into long-term knowledge at end of day.</p>
+  </div>
+
+  <!-- Obsidian Vault -->
+  <div class="card">
+    <h2>Obsidian Vault</h2>
+    <div class="stat"><span class="stat-label">Root</span><span class="mcp-status" style="text-align:right;font-size:11px">OneDrive/Documents/Obsidian Vault</span></div>
+    <div class="stat"><span class="stat-label">Inbox</span><span class="badge blue">00-Inbox/</span></div>
+    <div class="stat"><span class="stat-label">AI Project</span><span class="badge blue">01-Projects/AI-Automation/</span></div>
+    <div class="stat"><span class="stat-label">PKM</span><span class="badge blue">01-Projects/Personal-Knowledge/</span></div>
+    <div style="margin-top:10px">
+      <span class="tag">date</span>
+      <span class="tag">tags</span>
+      <span class="tag">project</span>
+      <span class="tag">source</span>
+    </div>
+    <p style="margin-top:10px;font-size:12px;color:var(--muted)">All captures land in 00-Inbox first. Use <code>/forge</code> to save a note.</p>
+  </div>
+
+  <!-- Active Projects -->
+  <div class="card">
+    <h2>Active Projects</h2>
+    <div class="stat"><span class="stat-label">AI Tools &amp; Automation</span><span class="badge green">Active</span></div>
+    <div class="stat"><span class="stat-label">Personal Knowledge System</span><span class="badge green">Active</span></div>
+    <div class="stat"><span class="stat-label">DP-700 Atlas</span><span class="badge yellow">Parked</span></div>
+    <div class="stat"><span class="stat-label">ClawGlove / ACDLC</span><span class="badge yellow">Parked</span></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Focus: Claude + Obsidian + scripts → second brain + agentic workflows.</p>
+  </div>
+
+  <!-- Security -->
+  <div class="card">
+    <h2>Security Checklist</h2>
+    <div class="stat"><span class="stat-label">.env in .gitignore</span><span class="badge green">✓</span></div>
+    <div class="stat"><span class="stat-label">Firecrawl key in .mcp.json</span><span class="badge green">✓ env var ref</span></div>
+    <div class="stat"><span class="stat-label">Pinecone key in .mcp.json</span><span class="badge green">✓ env var ref</span></div>
+    <div class="stat"><span class="stat-label">.env.example committed</span><span class="badge green">✓</span></div>
+    <div class="stat"><span class="stat-label">AGENTS.md present</span><span class="badge green">✓</span></div>
+    <p style="margin-top:12px;font-size:12px;color:var(--muted)">Store real keys in <code>.env</code> (local only, never committed).</p>
+  </div>
+
+</div>
+
+<footer>Agent OS · Fabric-Frontier · claude/clever-archimedes-wCWJX · 2026-06-05</footer>
+
+</body>
+</html>

@@ -4,5 +4,18 @@
     "firecrawl",
     "pinecone",
     "local-llm"
-  ]
+  ],
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/stop-save-memory.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
