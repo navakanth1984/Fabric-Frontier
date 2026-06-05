@@ -540,6 +540,21 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
 
+    let knowledgeBank = null;
+
+    const loadKnowledgeBank = async () => {
+        if (!knowledgeBank) {
+            try {
+                const res = await fetch('./knowledge_bank.json');
+                knowledgeBank = await res.json();
+            } catch (err) {
+                console.error("Failed to load knowledge bank", err);
+                knowledgeBank = { prompts: [], default: "Knowledge bank offline. The Nth Dimension cannot be reached." };
+            }
+        }
+        return knowledgeBank;
+    };
+
     const callNIM = async (text) => {
         try {
             // Show Thinking state
@@ -549,20 +564,23 @@ document.addEventListener('DOMContentLoaded', () => {
             chatMessages.appendChild(thinkingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            const response = await fetch('http://localhost:8004/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text, lang: "en" })
-            });
+            const kb = await loadKnowledgeBank();
+            const lowerText = text.toLowerCase();
+            let replyText = kb.default;
+
+            for (const item of kb.prompts) {
+                // If any keyword matches
+                if (item.keywords.some(kw => lowerText.includes(kw.toLowerCase()))) {
+                    replyText = item.response;
+                    break;
+                }
+            }
+
+            // Simulate network/thinking delay
+            await new Promise(resolve => setTimeout(resolve, 800));
 
             // Remove Thinking state
             thinkingDiv.remove();
-
-            if (!response.ok) throw new Error("Backend connection failed.");
-
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let fullResponse = "";
 
             // Create a new message div for the streaming text
             const msgDiv = document.createElement('div');
@@ -571,36 +589,24 @@ document.addEventListener('DOMContentLoaded', () => {
             msgDiv.appendChild(pTag);
             chatMessages.appendChild(msgDiv);
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                
-                const chunk = decoder.decode(value, { stream: true });
-                const lines = chunk.split('\n');
-                
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        try {
-                            const data = JSON.parse(line.slice(6));
-                            if (data.content) {
-                                fullResponse += data.content;
-                                pTag.innerHTML = formatMessageText(fullResponse);
-                                chatMessages.scrollTop = chatMessages.scrollHeight;
-                            }
-                        } catch (e) {
-                            console.warn("Failed to parse chunk", line);
-                        }
-                    }
-                }
+            chatHistory.push({ role: 'user', content: text });
+            chatHistory.push({ role: 'assistant', content: replyText });
+
+            // Simulate streaming
+            const words = replyText.split(' ');
+            let currentText = '';
+            for (const word of words) {
+                currentText += word + ' ';
+                pTag.innerHTML = formatMessageText(currentText);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                await new Promise(resolve => setTimeout(resolve, 30));
             }
 
-            chatHistory.push({ role: 'user', content: text });
-            chatHistory.push({ role: 'assistant', content: fullResponse });
         } catch (error) {
-            console.error('NIM Error:', error);
+            console.error('Knowledge Bank Error:', error);
             const thinking = chatMessages.querySelector('.thinking');
             if(thinking) thinking.remove();
-            addMessage('system', "Apologies, Voyager. The dimensional link is unstable. Please ensure the backend is running on port 8004.");
+            addMessage('system', "Apologies, Voyager. The local dimensional link is unstable.");
         }
     };
 
@@ -711,25 +717,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const synthesizeVoice = async (text) => {
         try {
-            addMessage('system', "Synthesizing voice in the Nth Dimension...");
-            const response = await fetch('http://localhost:8004/speak', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: text, lang: "te" }) // Default to Telugu as per Multilingual Tutor goal
-            });
-            const data = await response.json();
-            if (data.segments) {
-                // Play segments sequentially
-                let i = 0;
-                const playNext = () => {
-                    if (i < data.segments.length) {
-                        const audio = new Audio(data.segments[i].audio);
-                        audio.onended = playNext;
-                        audio.play();
-                        i++;
-                    }
-                };
-                playNext();
+            if ('speechSynthesis' in window) {
+                addMessage('system', "Initializing local vocal synth...");
+                // Remove HTML tags or Markdown formatting before speaking
+                let cleanText = text.replace(/<[^>]+>/g, '').replace(/\*/g, '');
+                const utterance = new SpeechSynthesisUtterance(cleanText);
+                utterance.lang = 'en-US';
+                
+                const voices = window.speechSynthesis.getVoices();
+                // Try to find a premium or natural sounding voice
+                const preferredVoice = voices.find(v => v.name.toLowerCase().includes('google') || v.name.toLowerCase().includes('premium')) || voices[0];
+                if (preferredVoice) utterance.voice = preferredVoice;
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                addMessage('system', "Voice synthesis is not supported in this browser.");
             }
         } catch (error) {
             console.error('Voice Error:', error);

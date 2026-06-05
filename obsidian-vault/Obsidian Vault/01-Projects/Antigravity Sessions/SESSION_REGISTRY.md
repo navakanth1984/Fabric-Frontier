@@ -8,12 +8,15 @@
 
 ## 🟡 Active Sessions
 
-*None*
+| ID | Date | Project | Summary | Tool | Link |
+|----|------|---------|---------|------|------|
+| | | | | | |
 
 ## ✅ Completed Sessions
 
 | ID | Date | Project | Summary | Tool | Link |
 |----|------|---------|---------|------|------|
+| S-009 | 2026-06-05 | nthdimensionacademy | Migrate Cosmic Guide from API to local knowledge bank | Antigravity CLI | [[S-009_2026-06-05_cosmic-guide-local-knowledge]] |
 | S-008 | 2026-06-05 | DAAVA / Academy | Refined demo video playback, URL formatting/overflow in chat, updated contact/socials, and added sub-atlas return links | Antigravity CLI | [[S-008_2026-06-05_video-and-link-refinements]] |
 | S-007 | 2026-06-05 | DAAVA / Academy | Verified styling/branding and session alignment | Antigravity CLI | [[S-007_2026-06-05_branding-and-verification]] |
 | S-006 | 2026-06-04 | DAAVA / Academy | Full FVP prompt generation, Orbital Maintenance refinement, and index.html fixes | Antigravity CLI | [[S-006_2026-06-04_daava-fvp-and-academy-fixes]] |
@@ -46,7 +49,7 @@ Before ending, the agent MUST:
 ### Naming Convention
 - **Session ID**: `S-001`, `S-002`, etc. (monotonically increasing)
 - **File name**: `S-{ID}_{date}_{short-slug}.md`
-- **Next available ID**: `S-003`
+- **Next available ID**: `S-010`
 
 ### Cross-Tool Compatibility
 This registry lives in the Obsidian vault at:

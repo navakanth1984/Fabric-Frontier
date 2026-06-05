@@ -1,0 +1,29 @@
+{
+  "prompts": [
+    {
+      "keywords": ["fabric demo", "architectural", "nth dimension"],
+      "response": "The Microsoft Fabric Demo you're watching illustrates the core architectural shift of the platform. At the center is **OneLake**, the 'OneDrive for Data'. Connected to it are different compute experiences: **Synapse Data Engineering** (Spark), **Synapse Data Warehouse** (SQL), **Data Factory** (Pipelines/Dataflows Gen2), and **Power BI** (Semantic Models). \n\nIn the Nth Dimension, we visualize this as a unified neural network where data flows seamlessly without duplication, enabling real-time insights through Direct Lake mode."
+    },
+    {
+      "keywords": ["dp-900", "azure data fundamentals", "relational and non-relational"],
+      "response": "Welcome to the **DP-900: Azure Data Fundamentals** Ascent! \n\nThe core difference lies in structure and schema. \n\n**Relational databases** (like Azure SQL Database) use tables with strict schemas (rows and columns) and are perfect for transactional systems (OLTP) maintaining ACID properties.\n\n**Non-relational databases** (like Azure Cosmos DB) store data flexibly—as JSON documents, key-value pairs, or graphs. They scale horizontally with ease and are ideal for unstructured data, real-time analytics, and globally distributed applications."
+    },
+    {
+      "keywords": ["dp-600", "analytics engineer", "lab 01"],
+      "response": "Welcome to the **DP-600: Fabric Analytics Engineer** Ascent! \n\n**Lab 01: Ingesting Data into the Lakehouse.**\nIn this foundational lab, you'll provision your first Microsoft Fabric Lakehouse. You will learn how to use Dataflows Gen2 to extract data from a legacy source, apply transformations using Power Query online, and load it securely into OneLake using the open Delta Parquet format. This creates the 'Bronze' and 'Silver' layers needed for your downstream Power BI Semantic Models."
+    },
+    {
+      "keywords": ["dp-700", "data engineer", "lab 01"],
+      "response": "Welcome to the **DP-700: Fabric Data Engineer** Ascent! \n\n**Lab 01: Advanced Spark Architecture & Lakehouse Routing.**\nIn this advanced lab, you'll dive deep into Synapse Data Engineering. You will configure Spark environments, write scalable PySpark notebooks to process high-volume data streams, and implement a robust Medallion Architecture (Bronze, Silver, Gold). You'll also learn to optimize your Delta tables using V-Order for maximum query performance."
+    },
+    {
+      "keywords": ["who are you", "what is this", "cosmic guide"],
+      "response": "I am the **Cosmic Guide** of the Nth Dimension Academy. I am a localized AI manifestation designed to guide you through your data engineering and analytics ascents. I have internalized the syllabus for DP-900, DP-600, and DP-700 Microsoft Fabric certifications. How may I assist your learning journey today?"
+    },
+    {
+      "keywords": ["hello", "hi", "hey"],
+      "response": "Greetings, traveler of the Nth Dimension. I am ready to guide you through the Microsoft Fabric ecosystem. You can ask me about our DP-600, DP-700, or DP-900 certification paths, or launch the interactive Fabric Demo."
+    }
+  ],
+  "default": "My knowledge banks are currently localized to the core Microsoft Fabric and Azure Data certification paths (DP-900, DP-600, DP-700) and the Nth Dimension curriculum. Please select one of the quick actions or ask a specific question about our Fabric modules."
+}

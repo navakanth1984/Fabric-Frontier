@@ -1,3 +1,6 @@
+# DEPRECATED: As of Session S-009, this backend API has been bypassed.
+# The nthdimensionacademy static site now uses a localized `knowledge_bank.json` and 
+# browser-native `SpeechSynthesis` to ensure 100% uptime without external API keys.
 import os
 import json
 import base64
