@@ -111,4 +111,31 @@ source: "URL or description"
 
 ---
 
-*Last updated: 2026-04-11*
+---
+
+## Git Push Standard Process
+
+### Why pushes fail in remote sessions
+Claude Code web sessions use a local git proxy that is provisioned read-only by default.
+The `GITHUB_TOKEN` env var has zero OAuth scopes. Both `git push` and the GitHub MCP `push_files` tool return 403.
+
+### One-time fix (do this once)
+1. Go to github.com → Settings → Developer Settings → Fine-grained tokens
+2. Create a token: repo = `navakanth1984/Fabric-Frontier`, permission = **Contents: Read and write**
+3. In the Claude Code web session environment settings, add: `FABRIC_PAT=<token>`
+
+### How it works after setup
+- The stop hook (`.claude/hooks/stop-save-memory.sh`) auto-wires the git remote using `FABRIC_PAT` and pushes any unpushed commits on every agent stop.
+- The session-start hook (`.claude/hooks/session-start.sh`) can be run manually to verify access: `bash .claude/hooks/session-start.sh`
+- The `/ship` command also triggers the same remote-wiring before pushing.
+
+### Debugging push failures
+```bash
+bash .claude/hooks/session-start.sh   # shows push access status
+git remote -v                          # check remote URL
+echo $FABRIC_PAT | head -c 20         # confirm token is set
+```
+
+---
+
+*Last updated: 2026-06-05*
