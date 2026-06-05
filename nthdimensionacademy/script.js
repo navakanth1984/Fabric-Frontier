@@ -400,6 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const Graph = ForceGraph3D()(graphContainer)
+            .width(graphContainer.clientWidth)
+            .height(graphContainer.clientHeight)
             .graphData(graphData)
             .nodeThreeObject(node => {
                 if (typeof THREE === 'undefined' || typeof SpriteText === 'undefined') return false;

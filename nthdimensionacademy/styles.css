@@ -996,7 +996,7 @@ footer {
 /* AI Assistant: Cosmic Guide */
 .ai-assistant {
     position: fixed;
-    bottom: 100px;
+    top: 90px;
     right: 30px;
     width: 380px;
     height: 550px;
@@ -1007,15 +1007,18 @@ footer {
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     opacity: 1;
     transform: scale(1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 12px;
 }
 
 @media (max-width: 768px) {
     .ai-assistant {
-        width: 90%;
+        width: 95%;
         height: 60vh;
-        max-height: 500px;
-        right: 5%;
-        bottom: 80px;
+        max-height: calc(100vh - 110px);
+        right: 2.5%;
+        top: 80px;
         z-index: 9999;
     }
 }
