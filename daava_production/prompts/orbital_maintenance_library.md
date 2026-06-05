@@ -35,6 +35,32 @@ This library contains optimized prompts grounded in the **Visual DNA** extracted
 
 ---
 
+## 🛠️ TECHNICAL EDGE-CASES (STRESS SCENARIOS)
+
+### 4. Failed Gear: The Snap-Back
+**Goal:** High-tension action sequence showing equipment failure.
+> **Prompt:** 
+> [ACTION] 14mm extreme close-up on a midnight blue climbing carabiner (#2C3E50) as it suddenly snaps under tension. 
+> [VFX] High-speed metal shards and sparks fly into the vacuum, illuminated by a harsh golden rim light (#F39C12). 
+> [MOTION] Arjun’s hand jerks violently as he loses his grip, his orange suit fabric (#E67E22) stretching under the strain. 
+> [STYLE] Handheld shaky-cam, high-speed shutter for sharp motion blur, hyper-detailed metal textures.
+
+### 5. Thermal Flare: The Blind Spot
+**Goal:** Drastic lighting shift for dramatic effect.
+> **Prompt:** 
+> [LIGHTING] A sudden, blinding white thermal flare erupts from off-screen, washing out the golden rim light and creating harsh, high-contrast silhouettes. 
+> [SUBJECT] Arjun shields his visor with an orange-gloved hand (#E67E22). The cyan status LEDs (#00FFFF) on his arm panel are the only visible details in the glare. 
+> [TECHNICAL] Extreme lens flare, bloom, volumetric light wrap, 14mm anamorphic.
+
+### 6. Emergency Descent: The Freefall
+**Goal:** Fast-paced motion and environmental scale.
+> **Prompt:** 
+> [CAMERA] A vertical downward tracking shot following Arjun as he performs a rapid emergency slide down a vertical truss. 
+> [VFX] Friction sparks (orange/gold) spray from the sliding rungs. The gas giant in the background spins slowly due to camera rotation. 
+> [MOTION] Motion blur on the foreground lattice, crystal clear focus on Arjun’s intense facial expression through the visor.
+
+---
+
 ## 🧬 CDLC PROMPT BRIDGE (Audit Protocol)
 To ensure zero drift, every generation must be audited against these **Surgical Constants**:
 - **Base Suit**: #E67E22 (Orange)
