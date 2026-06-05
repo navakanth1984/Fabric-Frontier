@@ -1438,4 +1438,47 @@ footer {
     border: 1px solid rgba(239, 68, 68, 0.3) !important;
 }
 
-
+/* --- INTRO.JS CUSTOM THEME --- */
+.custom-tour-tooltip {
+    background: rgba(10, 15, 25, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(0, 240, 255, 0.3) !important;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15) !important;
+    color: var(--text-light) !important;
+    border-radius: 12px !important;
+    font-family: var(--font-primary) !important;
+}
+.custom-tour-tooltip .introjs-tooltip-title {
+    color: var(--hyper-drive-blue) !important;
+    font-family: var(--font-headline) !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+}
+.custom-tour-tooltip .introjs-tooltiptext {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+.custom-tour-tooltip .introjs-arrow.top {
+    border-bottom-color: rgba(0, 240, 255, 0.3) !important;
+}
+.custom-tour-tooltip .introjs-arrow.bottom {
+    border-top-color: rgba(0, 240, 255, 0.3) !important;
+}
+.custom-tour-tooltip .introjs-button {
+    background: rgba(0, 240, 255, 0.1) !important;
+    border: 1px solid rgba(0, 240, 255, 0.4) !important;
+    color: var(--hyper-drive-blue) !important;
+    text-shadow: none !important;
+    border-radius: 20px !important;
+    padding: 0.4rem 1rem !important;
+    transition: all 0.3s ease !important;
+}
+.custom-tour-tooltip .introjs-button:hover {
+    background: rgba(0, 240, 255, 0.2) !important;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
+}
+.custom-tour-highlight {
+    box-shadow: 0 0 0 5000px rgba(0,0,0,0.8), 0 0 15px rgba(0, 240, 255, 0.5) !important;
+    border-radius: 8px !important;
+}

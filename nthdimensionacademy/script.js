@@ -1182,4 +1182,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const activePane = document.getElementById(`tab-${tabId}`);
         if (activePane) activePane.classList.add('active');
     };
+
+    // --- GUIDED NAVIGATION SYSTEM (INTRO.JS) ---
+    const startTourBtn = document.getElementById('start-tour-btn');
+    if (startTourBtn) {
+        startTourBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Ensure introJs is available
+            if (typeof introJs !== 'undefined') {
+                const intro = introJs();
+                intro.setOptions({
+                    steps: [
+                        {
+                            title: "Welcome Voyager! 🚀",
+                            intro: "Welcome to the Nth Dimension Academy. Let me show you how to navigate our multi-dimensional platform."
+                        },
+                        {
+                            element: document.querySelector('.navbar'),
+                            title: "Global Navigation 🗺️",
+                            intro: "Use these portals to instantly jump between our Certification Pathways, Expertise, and interactive Demos.",
+                            position: 'bottom'
+                        },
+                        {
+                            element: document.querySelector('#3d-graph-container'),
+                            title: "Neural Navigation System 🧠",
+                            intro: "This 3D Knowledge Graph maps the Microsoft Azure & Fabric ecosystem. <br><br><b>How to use it:</b><br>• <b>Drag</b> to rotate the universe<br>• <b>Scroll</b> to zoom in and out<br>• <b>Click</b> any glowing node to explore related concepts.",
+                            position: 'top'
+                        },
+                        {
+                            element: document.querySelector('#training'),
+                            title: "Pathways to Ascension 🎓",
+                            intro: "Explore our premium masterclass catalogs (DP-600, DP-700, etc.). Click the <b>Syllabus</b> buttons to dive into the detailed course Atlas sub-directories.",
+                            position: 'top'
+                        },
+                        {
+                            element: document.querySelector('#open-assistant'),
+                            title: "Cosmic Guide AI 🤖",
+                            intro: "Need immediate help? Click here to summon our localized AI assistant. It is pre-loaded with our entire Fabric knowledge base and can guide you intuitively.",
+                            position: 'left'
+                        }
+                    ],
+                    showProgress: true,
+                    showBullets: false,
+                    tooltipClass: 'custom-tour-tooltip',
+                    highlightClass: 'custom-tour-highlight'
+                });
+                intro.start();
+            } else {
+                console.error("Intro.js not loaded.");
+            }
+        });
+    }
 });
