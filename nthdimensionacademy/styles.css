@@ -1008,6 +1008,17 @@ footer {
     transform: scale(1);
 }
 
+@media (max-width: 768px) {
+    .ai-assistant {
+        width: 90%;
+        height: 60vh;
+        max-height: 500px;
+        right: 5%;
+        bottom: 80px;
+        z-index: 9999;
+    }
+}
+
 .ai-assistant.hidden {
     opacity: 0;
     transform: scale(0.8) translateY(20px);
@@ -1086,18 +1097,20 @@ footer {
 
 .message.system {
     align-self: flex-start;
-    background: rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    color: var(--text-main);
-    border-bottom-left-radius: 2px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    border-bottom-left-radius: 0;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .message.user {
     align-self: flex-end;
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    color: var(--text-main);
-    border-bottom-right-radius: 2px;
+    background: linear-gradient(to right, #0ea5e9, #6366f1);
+    border: none;
+    color: #fff;
+    border-bottom-right-radius: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .chat-input-area {

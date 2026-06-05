@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return group;
             })
             .enableNodeDrag(false)
-            .enableNavigationControls(false)
+            .enableNavigationControls(true)
             .linkColor(link => {
                 const sourceGroup = typeof link.source === 'object' ? link.source.group : graphData.nodes.find(n => n.id === link.source).group;
                 return groupColors[sourceGroup] + 'A0';
@@ -469,19 +469,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .showNavInfo(false)
             .onNodeHover(node => graphContainer.style.cursor = node ? 'pointer' : null);
 
-        // Auto-rotate
-        let angle = 0;
-        const rotationInterval = setInterval(() => {
-            if (!document.getElementById('3d-graph-container')) {
-                clearInterval(rotationInterval);
-                return;
-            }
-            Graph.cameraPosition({
-                x: 220 * Math.sin(angle),
-                z: 220 * Math.cos(angle)
-            });
-            angle += Math.PI / 450; // smooth slow-motion tesseract rotation
-        }, 30);
+        // Auto-rotate using native OrbitControls for stability
+        Graph.controls().autoRotate = true;
+        Graph.controls().autoRotateSpeed = 0.5;
+        Graph.controls().enableZoom = false;
+        Graph.controls().enablePan = false;
 
         // Resize handler
         window.addEventListener('resize', () => {
