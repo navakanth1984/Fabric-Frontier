@@ -530,10 +530,20 @@ document.addEventListener('DOMContentLoaded', () => {
         openBtn.style.display = 'flex';
     };
 
+    const formatMessageText = (text) => {
+        if (!text) return '';
+        // Convert URLs to clickable styled anchors, excluding trailing punctuation
+        let formatted = text.replace(
+            /(https?:\/\/[^\s<]+[^.,:;?!()[\]{}'"`\s<])/g, 
+            '<a href="$1" target="_blank" style="color: #00f0ff; text-decoration: underline; word-break: break-all;">$1</a>'
+        );
+        return formatted.replace(/\n/g, '<br>');
+    };
+
     const addMessage = (role, text) => {
         const msgDiv = document.createElement('div');
         msgDiv.className = `message ${role}`;
-        msgDiv.innerHTML = `<p>${text}</p>`;
+        msgDiv.innerHTML = `<p>${formatMessageText(text)}</p>`;
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     };
@@ -582,7 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const data = JSON.parse(line.slice(6));
                             if (data.content) {
                                 fullResponse += data.content;
-                                pTag.innerHTML = fullResponse.replace(/\n/g, '<br>');
+                                pTag.innerHTML = formatMessageText(fullResponse);
                                 chatMessages.scrollTop = chatMessages.scrollHeight;
                             }
                         } catch (e) {
@@ -625,14 +635,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.triggerFabricDemo = () => {
         const isMobile = window.innerWidth < 768;
-        const video169 = document.getElementById('fabric-video-16-9');
-        const video916 = document.getElementById('fabric-video-9-16');
+        let video169 = document.getElementById('fabric-video-16-9');
+        let video916 = document.getElementById('fabric-video-9-16');
         const overlay = document.getElementById('demo-overlay');
         
-        const activeVideo = isMobile ? video916 : video169;
+        // Fallback to single player if multi-format elements are not present
+        if (!video169 && !video916) {
+            const singlePlayer = document.getElementById('fabric-video-player');
+            if (singlePlayer) {
+                video169 = singlePlayer;
+                video916 = singlePlayer;
+            }
+        }
+        
+        const activeVideo = isMobile ? (video916 || video169) : (video169 || video916);
         const inactiveVideo = isMobile ? video169 : video916;
         
-        if (inactiveVideo) {
+        if (inactiveVideo && inactiveVideo !== activeVideo) {
             inactiveVideo.pause();
         }
         
@@ -673,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isMobileNow = window.innerWidth < 768;
             if (isMobileNow !== wasMobile) {
                 // Breakpoint crossed! Pause all videos and reset overlay
-                const video169 = document.getElementById('fabric-video-16-9');
+                const video169 = document.getElementById('fabric-video-16-9') || document.getElementById('fabric-video-player');
                 const video916 = document.getElementById('fabric-video-9-16');
                 const overlay = document.getElementById('demo-overlay');
 
