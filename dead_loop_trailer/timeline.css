@@ -1,0 +1,223 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #e0e0e0;
+    --accent-color: #ff3c00;
+    --cyan-accent: #00f3ff;
+    --veda-font: 'JetBrains Mono', 'Courier New', monospace;
+    --arjun-font: 'Inter', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    font-family: var(--arjun-font);
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+/* --- HYPERFRAMES STUDIO VIEWPORT --- */
+.hyperframes-studio {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #111 0%, #000 100%);
+}
+
+/* --- CINEMATIC OVERLAYS (Visual DNA) --- */
+.vfx-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 150;
+}
+
+/* Film Grain */
+.film-grain {
+    background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_pnt_noise.png');
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    animation: grain 0.2s steps(2) infinite;
+}
+
+@keyframes grain {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(-5%, -5%); }
+    100% { transform: translate(5%, 5%); }
+}
+
+/* CRT Scanlines */
+.crt-overlay {
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    z-index: 160;
+    opacity: 0.3;
+}
+
+/* Vignette */
+.vignette {
+    background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
+    z-index: 170;
+}
+
+/* Cinematic Letterbox */
+.letterbox {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 12vh;
+    background-color: black;
+    z-index: 180;
+}
+.letterbox.top { top: 0; }
+.letterbox.bottom { bottom: 0; }
+
+/* --- TIMELINE STRUCTURE --- */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: none;
+}
+
+.scene.active {
+    opacity: 1;
+    display: block;
+}
+
+/* --- MOTION ASSETS --- */
+.video-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    filter: brightness(0.8) contrast(1.1) saturate(1.2);
+}
+
+.dalle-frame {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+}
+
+/* Cinematic Motion Profiles */
+.scene.active .parallax-zoom-in {
+    animation: zoom-in 10s ease-out forwards;
+}
+.scene.active .parallax-zoom-out {
+    animation: zoom-out 10s ease-out forwards;
+}
+.scene.active .parallax-pan-left {
+    animation: pan-left 10s ease-out forwards;
+}
+
+@keyframes zoom-in {
+    from { transform: scale(1.1); }
+    to { transform: scale(1.25); }
+}
+@keyframes zoom-out {
+    from { transform: scale(1.25); }
+    to { transform: scale(1.1); }
+}
+@keyframes pan-left {
+    from { transform: scale(1.1) translateX(0); }
+    to { transform: scale(1.1) translateX(-5%); }
+}
+
+/* --- ADVANCED TYPOGRAPHY --- */
+.subtitles {
+    position: absolute;
+    bottom: 15vh;
+    width: 100%;
+    text-align: center;
+    z-index: 200;
+}
+
+.subtitles p {
+    display: inline-block;
+    padding: 10px 30px;
+    margin: 0;
+    font-size: 2.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+
+/* Arjun's Voice: Gritty, Heavy */
+.voice-arjun {
+    color: white;
+    font-family: var(--arjun-font);
+    text-shadow: 0 0 20px rgba(0,0,0,1), 4px 4px 0px var(--accent-color);
+}
+
+/* VEDA's Voice: Digital, Glowing */
+.voice-veda {
+    color: var(--cyan-accent);
+    font-family: var(--veda-font);
+    text-shadow: 0 0 10px var(--cyan-accent), 0 0 20px var(--cyan-accent);
+    letter-spacing: 4px;
+}
+
+/* Glitch Animation for text */
+.glitch-text {
+    animation: text-glitch 0.3s cubic-bezier(.25,.46,.45,.94) both;
+}
+
+@keyframes text-glitch {
+    0% { transform: translate(0); text-shadow: none; }
+    20% { transform: translate(-2px, 2px); text-shadow: 2px 0 red, -2px 0 blue; }
+    40% { transform: translate(-2px, -2px); text-shadow: 2px 0 blue, -2px 0 red; }
+    60% { transform: translate(2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
+    80% { transform: translate(2px, -2px); text-shadow: -2px 0 blue, 2px 0 red; }
+    100% { transform: translate(0); }
+}
+
+/* --- CONTROLS --- */
+.controls {
+    position: absolute;
+    z-index: 500;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#play-btn {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 15px 40px;
+    font-family: var(--veda-font);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 60, 0, 0.2);
+}
+
+#play-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 0 40px rgba(255, 60, 0, 0.6);
+}

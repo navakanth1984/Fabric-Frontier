@@ -1,0 +1,9 @@
+{
+  "hooks": [
+    {
+      "event": "onSessionStart",
+      "action": "execute_command",
+      "command": "node ./scripts/verify_plugin.js"
+    }
+  ]
+}

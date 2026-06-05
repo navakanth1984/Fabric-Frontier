@@ -1,0 +1,51 @@
+{
+  "version": "2.0",
+  "system": "Google Anti-gravity",
+  "hooks": [
+    {
+      "id": "prevent-accidental-data-loss",
+      "trigger": "before_tool_execution",
+      "tools": ["run_command"],
+      "patterns": [
+        "rm -rf",
+        "git clean",
+        "drop table",
+        "truncate"
+      ],
+      "action": "block_and_require_approval",
+      "message": "[GUARDRAIL ALERT] This command contains a high-risk deletion pattern. Antigravity requires explicit user approval before execution."
+    },
+    {
+      "id": "obsidian-format-linter",
+      "trigger": "before_file_write",
+      "files": ["obsidian-vault/**/*.md"],
+      "validation": {
+        "required_fields": ["date", "tags", "project", "source"],
+        "yaml_frontmatter": true
+      },
+      "action": "enforce_or_auto_correct",
+      "message": "[GUARDRAIL INFO] Markdown file is being saved to Obsidian vault. Enforcing YAML frontmatter standards (date, tags, project, source)."
+    },
+    {
+      "id": "hyperframes-lint-check",
+      "trigger": "before_tool_execution",
+      "tools": ["run_command"],
+      "patterns": [
+        "hyperframes render",
+        "npx hyperframes render"
+      ],
+      "pre_requisites": [
+        "npx hyperframes lint"
+      ],
+      "action": "run_pre_checks_and_report",
+      "message": "[GUARDRAIL INFO] Running 'npx hyperframes lint' to validate composition syntax before starting render task."
+    },
+    {
+      "id": "subagent-token-budget",
+      "trigger": "before_subagent_invocation",
+      "action": "validate_budget",
+      "max_concurrency": 3,
+      "message": "[GUARDRAIL WARNING] Checking subagent concurrency limits and token quotas to adhere to ULCOP v2.1."
+    }
+  ]
+}

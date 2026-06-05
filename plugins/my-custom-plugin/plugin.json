@@ -1,0 +1,37 @@
+{
+  "name": "my-custom-plugin",
+  "version": "1.0.0",
+  "description": "Custom developer plugin for Gemini agent workflows.",
+  "author": {
+    "name": "Navakanth",
+    "email": "navakanth@example.com",
+    "url": "https://github.com/navakanth1984"
+  },
+  "homepage": "https://github.com/navakanth1984/Fabric-Frontier",
+  "repository": "https://github.com/navakanth1984/Fabric-Frontier",
+  "license": "Apache-2.0",
+  "keywords": [
+    "custom",
+    "gemini-plugin",
+    "agent-workflows"
+  ],
+  "skills": "./skills/",
+  "hooks": "./hooks.json",
+  "mcpServers": "./mcp_config.json",
+  "interface": {
+    "displayName": "My Custom Plugin",
+    "shortDescription": "Custom developer workflows and agent behaviors.",
+    "longDescription": "This plugin enhances the agent's capabilities with custom developer workflows, system rules, and custom MCP integrations.",
+    "developerName": "Navakanth",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "brandColor": "#4F46E5",
+    "defaultPrompt": [
+      "Help me initialize my custom plugin tasks.",
+      "Verify the state of my custom plugin rules."
+    ]
+  }
+}

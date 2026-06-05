@@ -1,0 +1,68 @@
+// ============================================================
+// Scenario 1: K8s Troubleshooting
+// Service: Log Analytics
+// Tables: ContainerLog, KubePodInventory
+// Description: Identifies pods not in a 'Running' state and retrieves their recent error logs by joining inventory and log data.
+// Complexity: Intermediate
+// ============================================================
+
+let timeRange = ago(24h);
+KubePodInventory
+| where TimeGenerated > timeRange
+| where PodStatus != "Running"
+| summarize arg_max(TimeGenerated, *) by Name, Namespace
+| project PodName = Name, Namespace, PodStatus, ContainerID
+| join kind=inner (
+    ContainerLog
+    | where TimeGenerated > timeRange
+    | where LogEntrySource == "stderr" or Message has "error" or Message has "exception"
+) on ContainerID
+| project TimeGenerated, PodName, Namespace, PodStatus, Message, LogEntrySource
+| order by TimeGenerated desc
+
+// ============================================================
+// Scenario 2: Cloud Governance
+// Service: Sentinel / Log Analytics
+// Tables: AzureActivity, SecurityRecommendation
+// Description: Correlates high-severity security recommendations with recent administrative activities on those resources to identify potential governance gaps.
+// Complexity: Intermediate
+// ============================================================
+
+let timeRange = ago(7d);
+SecurityRecommendation
+| where TimeGenerated > timeRange
+| where Severity == "High" and RecommendationState == "Active"
+| summarize arg_max(TimeGenerated, *) by ResourceId
+| project ResourceId, RecommendationName, RecommendationSeverity = Severity
+| join kind=inner (
+    AzureActivity
+    | where TimeGenerated > timeRange
+    | where ActivityStatusValue == "Succeeded"
+    | where OperationNameValue has "write" or OperationNameValue has "delete" or OperationNameValue has "action"
+) on ResourceId
+| project TimeGenerated, ResourceId, OperationNameValue, Caller, RecommendationName, RecommendationSeverity
+| order by TimeGenerated desc
+
+// ============================================================
+// Scenario 3: Web App Performance
+// Service: App Insights
+// Tables: AppRequests, AppDependencies
+// Description: Analyzes slow application requests (Duration > 1s) and joins them with their associated dependency calls to pinpoint the bottleneck.
+// Complexity: Intermediate
+// ============================================================
+
+let slowRequests = 
+    AppRequests
+    | where TimeGenerated > ago(12h)
+    | where Success == false or DurationMs > 1000
+    | project TimeGenerated, OperationId, RequestName = Name, RequestDuration = DurationMs, Success;
+AppDependencies
+| where TimeGenerated > ago(12h)
+| join kind=inner slowRequests on OperationId
+| summarize 
+    TotalDependencyDuration = sum(DurationMs),
+    MaxDependencyDuration = max(DurationMs),
+    DependencyCount = count()
+    by OperationId, RequestName, RequestDuration, Success
+| project OperationId, RequestName, RequestDuration, TotalDependencyDuration, MaxDependencyDuration, DependencyCount, Success
+| order by RequestDuration desc

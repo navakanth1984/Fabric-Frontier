@@ -1,0 +1,110 @@
+// ============================================================
+// Scenario 1: Lateral Movement Tracing
+// Service: Microsoft Sentinel / Log Analytics
+// Tables: VMConnection, ConfigurationChange, AzureNetworkInventory
+// Description: Traces potential lateral movement by correlating established VM connections 
+//              with network configuration changes and identifying flows to non-standard tiers.
+// Complexity: Advanced
+// ============================================================
+
+let lookback = 7d;
+let threshold = 5; // Minimum connections to be considered a persistent flow
+let sensitive_ports = dynamic([22, 3389, 445, 5985, 5986]);
+// Identify recent network configuration changes that might have opened holes
+let network_mods = ConfigurationChange
+| where TimeGenerated > ago(lookback)
+| where ConfigChangeType == "Properties" and TargetObjectValue has "NetworkSecurityGroups"
+| extend NSGName = tostring(parse_json(ConfigData).Name)
+| project TimeGenerated, NSGName, ChangeType=ConfigChangeType, ResourceGroup;
+// Trace connections between internal VMs on sensitive ports
+VMConnection
+| where TimeGenerated > ago(lookback)
+| where Direction == "inbound"
+| where DestinationPort in (sensitive_ports)
+| where ipv4_is_private(SourceIp) and ipv4_is_private(DestinationIp)
+| summarize 
+    ConnectionCount = count(), 
+    LastSeen = max(TimeGenerated), 
+    Ports = make_set(DestinationPort),
+    BytesSent = sum(BytesSent),
+    BytesReceived = sum(BytesReceived)
+    by SourceIp, DestinationIp, Computer, RemoteComputer
+| where ConnectionCount > threshold
+// Join with configuration context to see if connections align with recent "drift"
+| join kind=leftouter (
+    network_mods 
+    | summarize LastMod = max(TimeGenerated) by NSGName
+) on $left.Computer == $right.NSGName 
+| extend PotentialLateralMovement = iif(isempty(LastMod), "Existing Path", "Newly Opened Path")
+| sort by ConnectionCount desc;
+
+// ============================================================
+// Scenario 2: FinOps Cost Spikes with Rolling Averages
+// Service: Log Analytics (FinOps / Azure Consumption)
+// Tables: AzureUsage
+// Description: Detects anomalous cost spikes by comparing daily consumption against a 
+//              7-day rolling average and calculating the percentage deviation.
+// Complexity: Advanced
+// ============================================================
+
+let start_time = ago(30d);
+let end_time = now();
+let timeframe = 1d;
+AzureUsage
+| where TimeGenerated between (start_time .. end_time)
+| summarize DailyCost = sum(PreTaxCost) by bin(TimeGenerated, timeframe), SubscriptionId, ServiceName
+| serialize 
+| extend RollingAvgCost = (
+    prev(DailyCost, 1) + prev(DailyCost, 2) + prev(DailyCost, 3) + 
+    prev(DailyCost, 4) + prev(DailyCost, 5) + prev(DailyCost, 6) + 
+    prev(DailyCost, 7)
+) / 7
+| where isnotnull(RollingAvgCost) and RollingAvgCost > 0
+| extend DeviationPercent = ((DailyCost - RollingAvgCost) / RollingAvgCost) * 100
+| extend IsAnomaly = iif(DeviationPercent > 50, true, false)
+| project TimeGenerated, SubscriptionId, ServiceName, DailyCost, RollingAvgCost, DeviationPercent, IsAnomaly
+| where IsAnomaly == true
+| sort by DeviationPercent desc;
+
+// ============================================================
+// Scenario 3: Identity & Secrets Correlation (The "Holy Trinity")
+// Service: Microsoft Sentinel
+// Tables: KeyVaultAccess, SigninLogs, AzureActivity
+// Description: Correlates a user's sign-in events with their administrative actions 
+//              and subsequent access to Key Vault secrets to identify "Blast Radius".
+// Complexity: Advanced
+// ============================================================
+
+let timeRange = 24h;
+let admin_actions = dynamic(["Microsoft.Compute/virtualMachines/write", "Microsoft.Resources/deployments/write"]);
+// 1. Capture potentially suspicious sign-ins
+let suspicious_signins = SigninLogs
+| where TimeGenerated > ago(timeRange)
+| where ResultType == 0 // Successful
+| where ResultDescription !has "MFA" // Sign-ins without MFA
+| project SignInTime = TimeGenerated, UserPrincipalName, IPAddress, Location, AppDisplayName;
+// 2. Capture administrative actions by those users
+let suspicious_activity = AzureActivity
+| where TimeGenerated > ago(timeRange)
+| where OperationNameValue in (admin_actions)
+| project ActivityTime = TimeGenerated, Caller, OperationNameValue, ResourceGroup, ActivityStatus = ActivityStatusValue;
+// 3. Capture Key Vault secret retrievals
+let kv_access = KeyVaultAccess
+| where TimeGenerated > ago(timeRange)
+| where OperationName == "SecretGet"
+| project KVTime = TimeGenerated, CallerUPN = tostring(parse_json(Identity).upn), Resource, OperationName, SecretName = ObjectName;
+// 4. Correlate the chain: Login -> Admin Action -> Secret Retrieval
+suspicious_signins
+| join kind=inner (suspicious_activity) on $left.UserPrincipalName == $right.Caller
+| where ActivityTime > SignInTime and (ActivityTime - SignInTime) < 4h
+| join kind=inner (kv_access) on $left.UserPrincipalName == $right.CallerUPN
+| where KVTime > ActivityTime and (KVTime - ActivityTime) < 2h
+| summarize 
+    FirstSignIn = min(SignInTime),
+    LastSecretAccess = max(KVTime),
+    ActivityCount = count(),
+    Operations = make_set(OperationNameValue),
+    SecretsAccessed = make_set(SecretName)
+    by UserPrincipalName, IPAddress, Resource
+| extend ThreatChainIntensity = iif(ActivityCount > 3, "High", "Medium")
+| sort by LastSecretAccess desc;

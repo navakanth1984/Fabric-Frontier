@@ -1,0 +1,56 @@
+{
+  "project": "Dead Loop",
+  "genre": "Indian Cyberpunk Noir",
+  "visual_dna": {
+    "color_palette": {
+      "primary": "Amber (#FFBF00)",
+      "secondary": "Neon Green (#39FF14)",
+      "shadows": "Deep Charcoal (#1C1C1C)",
+      "highlights": "Cyan (#00FFFF)"
+    },
+    "lighting": {
+      "style": "Chiaroscuro",
+      "sources": [
+        "Flickering CRT monitors",
+        "Neon signage reflecting on wet surfaces",
+        "Harsh sodium-vapor street lamps"
+      ],
+      "contrast": "High",
+      "volumetrics": "Heavy fog, rain mist, and smog"
+    },
+    "textures": {
+      "environment": [
+        "Wet asphalt",
+        "Cracked concrete",
+        "Aged copper with verdigris",
+        "Rusted corrugated iron"
+      ],
+      "wardrobe": [
+        "Worn synthetic leather",
+        "Tactical webbing",
+        "Frayed cotton"
+      ]
+    },
+    "camera_rules": {
+      "lenses": "Anamorphic (simulated distortion on edges)",
+      "movement": "Handheld for action, slow smooth dolly for tension",
+      "angles": "Low angles to emphasize imposing structures, extreme close-ups on eyes/tech"
+    },
+    "characters": {
+      "Arjun": {
+        "identity_lock": {
+          "gender": "Male",
+          "ethnicity": "South Asian",
+          "age": 32,
+          "features": "Deep-set weary eyes, slight stubble, sharp jawline",
+          "distinctive_mark": "Subtle cybernetic port behind left ear"
+        },
+        "wardrobe": "Dark, weathered tactical duster coat over a practical grey tunic. Heavy boots."
+      }
+    }
+  },
+  "safety_guidelines": {
+    "demographics": "Ensure 'South Asian' is depicted with dignity and high-tech competency, avoiding poverty tropes.",
+    "symbols": "Avoid mixing religious symbols with gore or decay. The 'mandala' should be depicted as a pristine digital construct."
+  }
+}

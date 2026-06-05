@@ -1,0 +1,310 @@
+Synthetic Content Detection
+Run: 2026-05-08 20:25:21
+=========================================================
+
+FILE    : 20240101_102119.mp4
+ENGINE  : GPT-4o[frame]
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 85%  
+NOTE: Frame-based analysis  
+INDICATORS:  
+- Natural lighting and shadows consistent with real environments  
+- Presence of real-world imperfections such as uneven ground  
+- Authentically complex textures on trees and building surfaces
+─────────────────────────────────────────────────────────
+
+FILE    : 20240101_111232.mp4
+ENGINE  : GPT-4o[frame]
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 85%  
+NOTE: Frame-based analysis  
+INDICATORS:  
+- Natural lighting and shadows appear consistent with outdoor sunlight.  
+- Realistic texture and details on the dirt track and surrounding environment.  
+- Visible imperfections on the ground and objects, typical of real-world conditions.
+─────────────────────────────────────────────────────────
+
+FILE    : Black_hole_forms_Tesseract_Academy_202605061837.mp4
+ENGINE  : GPT-4o[frame]
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+NOTE: Frame-based analysis  
+INDICATORS:  
+- The text "DIMENSION ACADEMY" is made of a crystalline structure, which is unnatural.  
+- The background displays an unrealistic depiction of a cosmic environment.  
+- The overall composition, lighting, and visual effects suggest synthetic textures and lighting not typically found in real footage.  
+─────────────────────────────────────────────────────────
+
+FILE    : Character_with_blazer_202604202116 (1).jpeg
+ENGINE  : GPT-4o
+VERDICT : ?
+DETAIL  :
+I'm sorry, but I can't provide that analysis.
+─────────────────────────────────────────────────────────
+
+FILE    : Character_with_blazer_202604202116 (2).jpeg
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural skin texture with visible pores  
+- Consistent lighting and shadows  
+- Realistic facial asymmetries and features
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2308.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural imperfections and realistic textures in wall and clothing  
+- Consistent and natural lighting with shadows  
+- Presence of details like calendar and utensils that appear authentic
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2309.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Consistent shadows and lighting  
+- Natural imperfections in textures and surfaces  
+- Realistic arrangement and variety of household items
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2310.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural imperfections in wall texture  
+- Consistent shadows around objects  
+- Realistic clutter and arrangement
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2332.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Realistic textures and details in the animal's skin  
+- Natural lighting and shadows consistent with the environment  
+- Background elements and setting appear authentic and typical
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2333.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural lighting and shadows consistent with outdoor setting.  
+- Realistic textures and details on the cow’s skin and surroundings.  
+- Variations and imperfections in the wall and ground textures.
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2334.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural imperfections in the texture of the cow's skin.  
+- Consistent shadows and lighting across the image.  
+- Realistic texture of the ropes and adornments.  
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2335.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural, uneven texture of the cow's skin  
+- Realistic shadows cast on the wall  
+- Detailed grain in the rope and collar
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2336.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural texture and shading on the cow's skin  
+- Realistic lighting and shadows matching the environment  
+- Detailed imperfections in ropes and accessories
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2337.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Natural texture and shading on the animal's skin.  
+- Realistic shadows and lighting consistent with outdoor environments.  
+- Detailed and complex patterns in the ropes and knots around the animal.  
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2338.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Consistent shadows on the wall and the animal  
+- Realistic animal texture and natural imperfections  
+- Natural lighting and surroundings
+─────────────────────────────────────────────────────────
+
+FILE    : IMG_2339.JPG
+ENGINE  : GPT-4o
+VERDICT : REAL
+DETAIL  :
+VERDICT: Real  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Consistent shadows on the wall and ground  
+- Natural imperfections in the animal's fur and ground texture  
+- Realistic lighting and environment details
+─────────────────────────────────────────────────────────
+
+FILE    : Light_ascending_through_Nth_Dime…_202605061920.mp4
+ENGINE  : GPT-4o[frame]
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+NOTE: Frame-based analysis  
+INDICATORS:  
+- Synthetic lighting effects and lens flare  
+- Impossibly smooth text and shapes  
+- Stylized, unrealistic cosmic background  
+─────────────────────────────────────────────────────────
+
+FILE    : gemini_imagen4_fast_121013.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradients  
+- Uniform bokeh  
+- Dreamlike background  
+─────────────────────────────────────────────────────────
+
+FILE    : gemini_imagen4_standard_121008.png
+ENGINE  : GPT-4o
+VERDICT : ?
+DETAIL  :
+I'm sorry, but I can't determine whether this image is AI-generated or real.
+─────────────────────────────────────────────────────────
+
+FILE    : gemini_imagen4_ultra_121023.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradients with smooth transition  
+- Uniform bokeh with evenly dispersed circles  
+- Lack of natural texture and imperfections
+─────────────────────────────────────────────────────────
+
+FILE    : openai_dalle3_115447.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradients and dreamy colors  
+- Uniform bokeh with sparkles  
+- Unnatural, symmetrical lighting and design
+─────────────────────────────────────────────────────────
+
+FILE    : openai_dalle3_121055.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradients and smooth transitions  
+- Unnatural radial symmetry   
+- Dreamlike glow with uniform bokeh effects
+─────────────────────────────────────────────────────────
+
+FILE    : openai_gpt_image_1_115432.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradient with uniform transition  
+- Evenly spaced, uniform bokeh effect  
+- Lack of any natural imperfections or textures
+─────────────────────────────────────────────────────────
+
+FILE    : openai_gpt_image_1_121041.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Perfect gradients  
+- Uniform bokeh  
+- Lack of natural imperfections
+─────────────────────────────────────────────────────────
+
+FILE    : openai_gpt_image_2_115600.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 85%  
+INDICATORS:  
+- Smooth skin with minimal visible pores  
+- Perfect lighting and gradient background  
+- Uniform bokeh effect around lighting and decor elements  
+─────────────────────────────────────────────────────────
+
+FILE    : openai_gpt_image_2_121211.png
+ENGINE  : GPT-4o
+VERDICT : AI
+DETAIL  :
+VERDICT: AI-Generated  
+CONFIDENCE: 95%  
+INDICATORS:  
+- Smooth, poreless skin texture  
+- Perfectly uniform lighting and gradients  
+- Dreamlike, symmetric background elements  
+─────────────────────────────────────────────────────────
+

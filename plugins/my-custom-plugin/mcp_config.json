@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "custom-utility-server": {
+      "command": "node",
+      "args": [
+        "./scripts/custom_server.js"
+      ],
+      "env": {
+        "CUSTOM_VAR": "default_value"
+      }
+    }
+  }
+}

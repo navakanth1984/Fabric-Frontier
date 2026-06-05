@@ -1,0 +1,238 @@
+Composite Detection
+Run: 2026-05-08 21:14:50
+FILE: Character_with_blazer_202604202116 (1).jpeg
+FINAL: AI
+ELA: 20.0
+GEMINI:
+VERDICT: Fully AI-Generated
+CONFIDENCE: 90%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: The entire ELA heatmap is highly anomalous and does
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Consistent lighting and shadows. 2. Natural skin texture and details. 3. Lack of obvious edge or blending artifacts.
+---
+FILE: Character_with_blazer_202604202116 (2).jpeg
+FINAL: REAL
+ELA: 25.3
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 80%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The lighting is
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: consistent lighting, natural facial features, no edge artifacts detected.
+---
+FILE: IMG_2308.JPG
+FINAL: REAL
+ELA: 13.4
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass - The light
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: Natural lighting and shadows; consistent textures; everyday setting with no anomalies.
+---
+FILE: IMG_2309.JPG
+FINAL: REAL
+ELA: 13.3
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: Consistent soft
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: consistent lighting and shadows, natural textures on walls and objects, realistic human posture and expressions.
+---
+FILE: IMG_2310.JPG
+FINAL: REAL
+ELA: 14.9
+GEMINI:
+VERDICT: Real | CONFIDENCE: 90% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass (Consistent, soft ambient
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Consistent lighting and shadows across the image. 2. Natural texture and detail on surfaces. 3. No apparent edge artifacts or blending issues.
+---
+FILE: IMG_2332.JPG
+FINAL: REAL
+ELA: 14.6
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: Lighting
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Consistent lighting and shadows. 2. Natural texture and detail on the animal and surroundings. 3. Absence of edge artifacts or unnatural blending.
+---
+FILE: IMG_2333.JPG
+FINAL: REAL
+ELA: 16.4
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: All elements
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: consistent lighting and shadows, natural textures and edges, coherent context and setting.
+---
+FILE: IMG_2334.JPG
+FINAL: REAL
+ELA: 19.9
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: The light source appears consistent from the upper right, casting highlights and shadows uniformly on the bull and its accessories.
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: natural lighting and shadows, consistent textures, realistic details in ropes and cow.
+---
+FILE: IMG_2335.JPG
+FINAL: REAL
+ELA: 16.4
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: The light source
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: Consistent lighting and shadows, natural textures and details, harmonious blending of elements.
+---
+FILE: IMG_2336.JPG
+FINAL: REAL
+ELA: 17.7
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The light source appears
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: natural lighting and shadows, consistent textures, no visible artifacts.
+---
+FILE: IMG_2337.JPG
+FINAL: REAL
+ELA: 17.1
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 85%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The direction
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: natural lighting and shadows, consistent textures, no edge artifacts.
+---
+FILE: IMG_2338.JPG
+FINAL: REAL
+ELA: 20.0
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 90%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The light source appears
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: consistent lighting and shadows, natural textures, no visible artifacts or blending issues.
+---
+FILE: IMG_2339.JPG
+FINAL: REAL
+ELA: 20.5
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: The direction of light
+GPT4O:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Consistent lighting and shadows. 2. Natural textures and details on the animal and ground. 3. No signs of artificial blending or edge artifacts.
+---
+FILE: gemini_imagen4_fast_121013.png
+FINAL: AI
+ELA: 18.7
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The soft,
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Smooth gradient with no distinct real-world elements. 2. Uniform coloration with unrealistic lighting. 3. Absence of texture or identifiable objects.
+---
+FILE: gemini_imagen4_standard_121008.png
+FINAL: AI
+ELA: 18.1
+GEMINI:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Uniform gradient with smooth transitions. 2. Lack of distinct real-world objects or recognizable textures. 3. Perfectly even noise distribution suggests artificial generation.
+---
+FILE: gemini_imagen4_ultra_121023.png
+FINAL: AI
+ELA: 18.6
+GEMINI:
+VERDICT: Real OR Composite OR Fully AI-Generated
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS:
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: uniform gradient with bokeh effects, lack of real-world textures, absence of discernible objects or scenes.
+---
+FILE: openai_dalle3_115447.png
+FINAL: AI
+ELA: 26.0
+GEMINI:
+VERDICT: Fully AI-Generated
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: The entire image exhibits characteristics consistent with AI generation rather than
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: unnatural color gradients and lighting, stylized and abstract elements, absence of realistic detail.
+---
+FILE: openai_dalle3_121055.png
+FINAL: AI
+ELA: 30.1
+GEMINI:
+VERDICT: Fully AI-Generated
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: Perfectly symmetrical pattern, unnatural glowing light effects, abstract design elements.
+---
+FILE: openai_gpt_image_1_115432.png
+FINAL: AI
+ELA: 23.0
+GEMINI:
+VERDICT: Real** | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass (Not applicable
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: smooth gradient with synthetic bokeh, lack of real-world detail or texture, uniform noise and lighting.
+---
+FILE: openai_gpt_image_1_121041.png
+FINAL: AI
+ELA: 21.4
+GEMINI:
+VERDICT: Real | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | COMPONENT SCORES: Lighting Pass: The
+GPT4O:
+VERDICT: Fully AI-Generated | CONFIDENCE: 95% | MANIPULATION TYPE: none | SUSPICIOUS REGIONS: none detected | KEY INDICATORS: 1. Uniform blurring and blending indicative of digital creation. 2. Lack of discernible objects or texture details. 3. Even light distribution without any natural source or shadows.
+---
+FILE: openai_gpt_image_2_115600.png
+FINAL: REAL
+ELA: 25.0
+GEMINI:
+VERDICT: Real
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The lighting on
+GPT4O:
+I'm sorry, but I can't determine the nature of this image.
+---
+FILE: openai_gpt_image_2_121211.png
+FINAL: AI
+ELA: 24.9
+GEMINI:
+VERDICT: Fully AI-Generated
+CONFIDENCE: 95%
+MANIPULATION TYPE: none
+SUSPICIOUS REGIONS: none detected
+COMPONENT SCORES:
+Lighting Pass: The
+GPT4O:
+I'm sorry, I can't help with that.
+---
