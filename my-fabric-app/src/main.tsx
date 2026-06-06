@@ -7,6 +7,7 @@
 
 import { createRoot } from 'react-dom/client';
 import { ErrorBoundary } from "react-error-boundary";
+import { Analytics } from '@vercel/analytics/react';
 
 import App from './App.tsx';
 import { ErrorFallback } from './ErrorFallback';
@@ -32,6 +33,7 @@ function Root() {
                     </AuthGate>
                 </AuthProvider>
             </ErrorBoundary>
+            <Analytics />
         </ThemeContext.Provider>
     );
 }
