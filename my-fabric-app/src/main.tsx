@@ -7,6 +7,7 @@
 
 import { createRoot } from 'react-dom/client';
 import { ErrorBoundary } from "react-error-boundary";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import App from './App.tsx';
 import { ErrorFallback } from './ErrorFallback';
@@ -32,6 +33,7 @@ function Root() {
                     </AuthGate>
                 </AuthProvider>
             </ErrorBoundary>
+            <SpeedInsights />
         </ThemeContext.Provider>
     );
 }
